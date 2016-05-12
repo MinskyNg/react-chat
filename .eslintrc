@@ -1,0 +1,16 @@
+{
+  "env": {
+    "node": true
+  },
+  "globals": {
+  },
+  "plugins": [
+  ],
+  "extends": "eslint-config-airbnb",
+  "rules": {
+    "indent": [2, 4, { "SwitchCase": 1 }],
+    "comma-dangle": 0,
+    "no-console": 0,
+    "id-length": 0
+  }
+}
