@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var debug = require('debug');
+var ejs = require('ejs');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
@@ -20,7 +21,8 @@ process.env.NODE_ENV = 'development';
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.engine('.html', ejs.__express);
+app.set('view engine', 'html');
 
 // 使用中间件
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -41,7 +43,7 @@ if (app.get('env') === 'development') {
 
 // 请求处理
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+    res.render(path.join(__dirname, 'views', 'index.html'));
 });
 
 // 登陆处理
