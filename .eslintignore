@@ -1,3 +1,5 @@
 node_modules/**
 **/*.css
 **/*.html
+server.js
+server.dev.js

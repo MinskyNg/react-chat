@@ -2,6 +2,9 @@
   "env": {
     "node": true
   },
+  ecmaFeatures: {
+    jsx: true
+  },
   "globals": {
   },
   "plugins": [
@@ -11,6 +14,7 @@
     "indent": [2, 4, { "SwitchCase": 1 }],
     "comma-dangle": 0,
     "no-console": 0,
-    "id-length": 0
+    "id-length": 0,
+    "react/prop-types": 0
   }
 }

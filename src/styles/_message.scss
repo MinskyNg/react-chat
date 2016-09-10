@@ -1,0 +1,48 @@
+@mixin message-style($marginBottom, $fontSize, $color) {
+  margin-bottom: $marginBottom;
+  font-size: $fontSize;
+  color: $color;
+}
+
+.message-sender {
+  @include message-style(3px, 1em, gray);
+  padding-left: 30px;
+  background: url(./img/user.png) no-repeat 0 50%;
+}
+
+.message-info {
+  @include message-style(0.5em, 1.5em, #4876FF);
+  font-weight: bold;
+}
+
+.message-public {
+  @include message-style(0.5em, 1em, #2B2B2B);
+  margin-left: 30px;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.message-private {
+  @include message-style(0.5em, 1em, #191970);
+  margin-left: 30px;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.message-warn {
+  @include message-style(0.5em, 1.5em, #ff3f3f);
+  font-weight: bold;
+}
+
+.message-success {
+  @include message-style(0.5em, 1.5em, #32CD32);
+  font-weight: bold;
+}
+
+.message-time {
+  float: right;
+  margin-bottom: 3px;
+  margin-left: 20px;
+}
