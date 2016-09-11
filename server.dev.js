@@ -133,7 +133,6 @@ io.on('connection', function(socket) {
         } else {
             // 向私聊用户发送该用户的信息
             sockets[data.receiver].emit('send', data);
-
         }
     });
 

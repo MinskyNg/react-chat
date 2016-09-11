@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { login, addMsg, clearMsg, addUser, removeUser, fetchUserList,
-  changeReceiver, warningVisible } from '../actions';
+  clearUserList, changeReceiver, warningVisible } from '../actions';
 import ChatContent from '../components/ChatContent';
 import ChatInput from '../components/ChatInput';
 import ChatSideBar from '../components/ChatSideBar';
@@ -60,12 +60,15 @@ class ChatApp extends React.Component {
         socket.on('disconnect', () => {
             const msg = '<div class="message message-warn"><span class="icon icon-warn"></span>系统: 连接服务器失败！</div>';
             this.props.dispatch(addMsg(msg));
+            this.props.dispatch(changeReceiver('SEND_TO_ALL'));
+            this.props.dispatch(clearUserList());
         });
 
         // 重新启动服务器
         socket.on('reconnect', () => {
             const msg = '<div class="message message-success"><span class="icon icon-success"></span>系统: 重新连接服务器！</div>';
             this.props.dispatch(addMsg(msg));
+            this.props.dispatch(fetchUserList());
             socket.emit('online', {
                 user: this.props.user
             });

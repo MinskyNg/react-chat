@@ -1,5 +1,5 @@
 import { CHANGE_USER, CHANGE_RECEIVER, INIT_USER_LIST, ADD_USER, REMOVE_USER,
-    ADD_MSG, CLEAR_MSG, WARNING_VISIBLE } from '../constants/actionTypes';
+    CLEAR_USER_LIST, ADD_MSG, CLEAR_MSG, WARNING_VISIBLE } from '../constants/actionTypes';
 import fetch from 'isomorphic-fetch';
 
 
@@ -36,6 +36,12 @@ export function removeUser(name) {
     return {
         type: REMOVE_USER,
         name
+    };
+}
+
+export function clearUserList() {
+    return {
+        type: CLEAR_USER_LIST
     };
 }
 
