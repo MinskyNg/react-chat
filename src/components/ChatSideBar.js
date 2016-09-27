@@ -1,14 +1,25 @@
 import React from 'react';
 
 
-export default class ChatSideBar extends React.Component {
+export default class ChatSideBar extends React.PureComponent {
     render() {
         let userItems = this.props.userList.map((name, index) => {
             if (name !== this.props.user) {
                 if (name !== this.props.receiver) {
-                    return <li key={ index } onClick={ () => this.props.changeReceiver(name) } title="双击聊天">{ name === 'SEND_TO_ALL' ? '所有人' : name }</li>;
+                    return (
+                        <li
+                          key={ index }
+                          title="双击聊天"
+                          onClick={ () => this.props.changeReceiver(name) }
+                        >{ name === 'SEND_TO_ALL' ? '所有人' : name }</li>
+                    );
                 }
-                return <li key={ index } className="receiver" >{ name === 'SEND_TO_ALL' ? '所有人' : name }</li>;
+                return (
+                    <li
+                      key={ index }
+                      className="receiver"
+                    >{ name === 'SEND_TO_ALL' ? '所有人' : name }</li>
+                );
             }
             return <li key={ index } >{ name }</li>;
         });

@@ -11,7 +11,7 @@ import io from 'socket.io-client';
 
 const socket = io();
 
-class ChatApp extends React.Component {
+class ChatApp extends React.PureComponent {
     componentDidMount() {
         this.props.dispatch(fetchUserList());
         // 监听其他用户上线
@@ -19,7 +19,7 @@ class ChatApp extends React.Component {
             let msg;
             // 显示系统消息
             if (data.user !== this.props.user) {
-                msg = '<div class="message message-info"><span class="icon icon-info"></span>系统: 用户 ' + data.user + ' 上线了！</div>';
+                msg = `<div class="message message-info"><span class="icon icon-info"></span>系统: 用户 ${data.user} 上线了！</div>`;
             } else {
                 msg = '<div class="message message-info"><span class="icon icon-info"></span>系统: 欢迎进入聊天室！</div>';
             }
@@ -31,15 +31,16 @@ class ChatApp extends React.Component {
             let msg;
             // 对所有人
             if (data.receiver === 'SEND_TO_ALL') {
-                msg = '<div class="message message-sender">' + data.sender +
-                '<span class="message-time"><span class="icon icon-time"></span>' + data.time +
-                '</span></div><div class="message message-public">' + data.msgText + '</div>';
+                msg = `<div class="message message-sender">${data.sender}
+                <span class="message-time"><span class="icon icon-time"></span>${data.time}
+                </span></div><div class="message message-public">${data.msgText}</div>`;
             }
             // 对用户私聊
             if (data.receiver === this.props.user) {
-                msg = '<div class="message message-sender">' + data.sender +
-                ' 对你说:<span class="message-time"><span class="icon icon-time"></span>' + data.time +
-                '</span></div><div class="message message-private">' + data.msgText + '</div>';
+                msg = `<div class="message message-sender">${data.sender}
+                 对你说:<span class="message-time"><span class="icon icon-time">
+                 </span>${data.time}
+                 </span></div><div class="message message-private">${data.msgText}</div>`;
             }
             this.props.dispatch(addMsg(msg));
         });
@@ -47,7 +48,8 @@ class ChatApp extends React.Component {
         // 监听其他用户下线
         socket.on('offline', data => {
             // 显示系统消息
-            const msg = '<div class="message message-info"><span class="icon icon-info"></span>系统: 用户 ' + data.user + '  下线了！</div>';
+            const msg = `<div class="message message-info">
+              <span class="icon icon-info"></span>系统: 用户 ${data.user}  下线了！</div>`;
             this.props.dispatch(addMsg(msg));
             this.props.dispatch(removeUser(data.user));
             // 如果下线用户是私聊对象，改为对 "所有人"
@@ -113,7 +115,7 @@ class ChatApp extends React.Component {
 }
 
 ChatApp.propTypes = {
-    user: PropTypes.string,
+    user: PropTypes.string.isRequired,
     receiver: PropTypes.string.isRequired,
     userList: PropTypes.arrayOf(PropTypes.string).isRequired,
     chatMsg: PropTypes.string.isRequired,

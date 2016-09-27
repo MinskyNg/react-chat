@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default class ChatContent extends React.Component {
+export default class ChatContent extends React.PureComponent {
     handleSubmit(event) {
         event.preventDefault();
         const name = this._name.value.replace(/(^\s*)|(\s*$)/g, '')
@@ -29,11 +29,25 @@ export default class ChatContent extends React.Component {
 
     render() {
         return (
-            <div className="login" style={ { display: this.props.user === 'NOT_LOGGED_IN' ? 'block' : 'none' } }>
-            <form ref={ form => {this._form = form;} } action="#" onSubmit={ e => this.handleSubmit(e) }>
+            <div
+              className="login"
+              style={{ display: this.props.user === 'NOT_LOGGED_IN' ? 'block' : 'none' }}
+            >
+            <form
+              action="#"
+              ref={ form => this._form = form }
+              onSubmit={ e => this.handleSubmit(e) }
+            >
                 <label htmlFor="name">请输入昵称：</label>
-                <input ref={ input => {this._name = input;} } type="text" name="name" className="name" />
-                <p className="warning" style={ { visibility: this.props.warning ? 'visible' : 'hidden' } } >用户名已存在或含非法字符</p>
+                <input
+                  className="name"
+                  type="text" name="name"
+                  ref={ input => this._name = input }
+                />
+                <p
+                  className="warning"
+                  style={{ visibility: this.props.warning ? 'visible' : 'hidden' }}
+                >用户名已存在或含非法字符</p>
                 <button type="submit" className="button-login">登录</button>
             </form>
             </div>
