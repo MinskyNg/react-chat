@@ -1,5 +1,5 @@
 {
-  "name": "chatroom",
+  "name": "react-chatroom",
   "version": "1.0.0",
   "description": "A online chatroom",
   "scripts": {
@@ -9,16 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MinskyNg/chatroom.git"
+    "url": "git+https://github.com/MinskyNg/react-chatroom.git"
   },
   "author": "minskyng",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MinskyNg/chatroom/issues"
+    "url": "https://github.com/MinskyNg/react-chatroom/issues"
   },
-  "homepage": "https://github.com/MinskyNg/chatroom#readme",
+  "homepage": "https://github.com/MinskyNg/react-chatroom#readme",
   "devDependencies": {
-    "autoprefixer-loader": "^3.2.0",
+    "autoprefixer": "^6.5.0",
     "babel-core": "6.x",
     "babel-eslint": "6.x",
     "babel-loader": "6.x",
@@ -36,6 +36,8 @@
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.22.0",
     "node-sass": "^3.9.3",
+    "postcss-loader": "^0.13.0",
+    "precss": "^1.4.0",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11",
@@ -66,6 +68,7 @@
     "redux-immutable": "^3.0.8",
     "redux-thunk": "^2.1.0",
     "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8",
     "xss": "^0.2.13"
   }
 }

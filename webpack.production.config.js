@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 var CleanPlugin = require('clean-webpack-plugin');
@@ -55,7 +56,7 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.css$/, loader: 'style!css' },
+            { test: /\.css$/, loader: 'style!css!postcss' },
             { test: /\.scss$/, include: path.resolve(__dirname, 'src/styles'), loader: 'style!css!postcss!sass' },
             { test: /\.js[x]?$/,
                 include: path.resolve(__dirname, 'src'),
@@ -68,5 +69,5 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.jsx'],
     },
-    postcss: [autoprefixer({ browsers: ['last 2 versions'] })]
+    postcss: () => [precss, autoprefixer({ browsers: ['last 2 versions'] })]
 };

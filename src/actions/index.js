@@ -3,66 +3,25 @@ import { CHANGE_USER, CHANGE_RECEIVER, INIT_USER_LIST, ADD_USER, REMOVE_USER,
 import fetch from 'isomorphic-fetch';
 
 
-export function changeUser(name) {
-    return {
-        type: CHANGE_USER,
-        name
+function makeActionCreator(type, ...argNames) {
+    return (...args) => {
+        const action = { type };
+        argNames.forEach((arg, index) => {
+            action[argNames[index]] = args[index];
+        });
+        return action;
     };
 }
 
-export function changeReceiver(name) {
-    return {
-        type: CHANGE_RECEIVER,
-        name,
-    };
-}
-
-export function initUserList(userList) {
-    return {
-        type: INIT_USER_LIST,
-        userList
-    };
-}
-
-
-export function addUser(name) {
-    return {
-        type: ADD_USER,
-        name
-    };
-}
-
-export function removeUser(name) {
-    return {
-        type: REMOVE_USER,
-        name
-    };
-}
-
-export function clearUserList() {
-    return {
-        type: CLEAR_USER_LIST
-    };
-}
-
-export function addMsg(msg) {
-    return {
-        type: ADD_MSG,
-        msg
-    };
-}
-
-export function clearMsg() {
-    return {
-        type: CLEAR_MSG
-    };
-}
-
-export function warningVisible() {
-    return {
-        type: WARNING_VISIBLE
-    };
-}
+export const changeUser = makeActionCreator(CHANGE_USER, 'name');
+export const changeReceiver = makeActionCreator(CHANGE_RECEIVER, 'name');
+export const initUserList = makeActionCreator(INIT_USER_LIST, 'userList');
+export const addUser = makeActionCreator(ADD_USER, 'name');
+export const removeUser = makeActionCreator(REMOVE_USER, 'name');
+export const clearUserList = makeActionCreator(CLEAR_USER_LIST);
+export const addMsg = makeActionCreator(ADD_MSG, 'msg');
+export const clearMsg = makeActionCreator(CLEAR_MSG);
+export const warningVisible = makeActionCreator(WARNING_VISIBLE);
 
 
 // 异步action

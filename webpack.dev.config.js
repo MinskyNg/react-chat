@@ -6,6 +6,17 @@ var publicPath = 'http://localhost:3000/';
 var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
 
 module.exports = {
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('development')
+        }),
+        new HtmlWebpackPlugin({
+            favicon: './src/favicon.ico',
+            template: path.resolve(__dirname, 'src/index.tmpl.html')
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
+    ],
     entry: {
         index: [
             path.resolve(__dirname, 'src/index.js'),
@@ -29,20 +40,6 @@ module.exports = {
             { test: /\.(png|jpg)$/, loader: 'url?limit=8192' }
         ]
     },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
-        new HtmlWebpackPlugin({
-            favicon: './src/favicon.ico',
-            template: path.resolve(__dirname, 'src/index.tmpl.html'),
-            inject: true,
-            hash: true,
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true
-            }
-        })
-    ],
     resolve: {
         extensions: ['', '.js', '.jsx'],
     }
