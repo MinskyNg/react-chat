@@ -7,44 +7,31 @@ var xss = require('xss');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
-var webpack = require('webpack');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
-var webpackDevConfig = require('./webpack.dev.config.js');
-var compiler = webpack(webpackDevConfig);
 
 
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-process.env.NODE_ENV = 'development';
+process.env.NODE_ENV = 'production';
+
 
 // 初始化环境配置
 var port = normalizePort(process.env.PORT || '3000');
-var dist = path.join(__dirname, 'dist');
+var dist = path.join(__dirname, '../dist');
 app.set('port', port);
 app.set('views', dist);
 app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
 
 // 使用中间件
-// webpack
-app.use(webpackDevMiddleware(compiler, {
-    publicPath: webpackDevConfig.output.publicPath,
-    noInfo: true,
-    stats: {
-        colors: true
-    }
-}));
-app.use(webpackHotMiddleware(compiler));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(cookieParser());
-
+app.use(express.static(dist));
 
 
 // 仅在开发环境下汇报异常信息
@@ -133,6 +120,7 @@ io.on('connection', function(socket) {
         } else {
             // 向私聊用户发送该用户的信息
             sockets[data.receiver].emit('send', data);
+
         }
     });
 

@@ -11,7 +11,7 @@ module.exports = {
             'process.env.NODE_ENV': JSON.stringify('development')
         }),
         new HtmlWebpackPlugin({
-            favicon: './src/favicon.ico',
+            favicon: path.resolve(__dirname, 'src/favicon.ico'),
             template: path.resolve(__dirname, 'src/index.tmpl.html')
         }),
         new webpack.HotModuleReplacementPlugin(),

@@ -1,22 +1,22 @@
 {
-  "name": "react-chatroom",
+  "name": "react-chat",
   "version": "1.0.0",
   "description": "A online chatroom",
   "scripts": {
-    "start": "node server.dev.js",
+    "start": "node server/server.dev.js",
     "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MinskyNg/react-chatroom.git"
+    "url": "git+https://github.com/MinskyNg/react-chat.git"
   },
   "author": "minskyng",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MinskyNg/react-chatroom/issues"
+    "url": "https://github.com/MinskyNg/react-chat/issues"
   },
-  "homepage": "https://github.com/MinskyNg/react-chatroom#readme",
+  "homepage": "https://github.com/MinskyNg/react-chat#readme",
   "devDependencies": {
     "autoprefixer": "^6.5.0",
     "babel-core": "6.x",
@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "babel-runtime": "6.x",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
     "debug": "^2.2.0",
@@ -59,6 +60,7 @@
     "express": "~4.14.0",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
+    "mongoose": "^4.6.4",
     "morgan": "~1.7.0",
     "normalize.css": "^4.2.0",
     "react": "^15.3.1",
