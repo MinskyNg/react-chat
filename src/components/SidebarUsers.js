@@ -12,7 +12,6 @@ export default class SidebarUsers extends React.PureComponent {
             <ul>
                 <li>
                     <div className="avatar">
-                        <i className="icon-pc"></i>
                     </div>
                     <div className="profile">
                         <h4>HAHA</h4>
@@ -21,7 +20,6 @@ export default class SidebarUsers extends React.PureComponent {
                 </li>
                 <li>
                     <div className="avatar">
-                        <i className="icon-phone"></i>
                     </div>
                     <div className="profile">
                         <h4>HAHA</h4>
@@ -30,7 +28,6 @@ export default class SidebarUsers extends React.PureComponent {
                 </li>
                 <li>
                     <div className="avatar">
-                        <i className="icon-phone"></i>
                     </div>
                     <div className="profile">
                         <h4>HAHA</h4>

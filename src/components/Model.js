@@ -20,6 +20,7 @@ export default class Model extends React.PureComponent {
                 </div>
                 <div className="edit-group">
                     <h2>创建群组</h2>
+                    <div><span>上传头像</span></div>
                     <form action="#">
                         <input type="text" placeholder="请输入群组名" maxLength="10"/>
                         <textarea placeholder="请输入群组简介" maxLength="30"></textarea>

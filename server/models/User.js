@@ -1,3 +1,8 @@
+/**
+* 用户数据
+**/
+
+
 var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 
@@ -6,7 +11,7 @@ var UserSchema = mongoose.Schema({
     username: { type: String, unique: true },
     password: String,
     signature: { type: String, default: '' },
-    avatar: { type: String, default: 'TBdw!}|G%IH3~#uw' },
+    avatar: { type: String, default: 'userdefault' },
     date: String
 });
 

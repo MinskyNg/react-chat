@@ -13,8 +13,8 @@ export default class SidebarSets extends React.PureComponent {
                 <li className="checkbox">
                     <h4>接收私聊</h4>
                     <div>
-                        <input type="checkbox" id="toggleRecive" />
-                        <label htmlFor="toggleRecive"></label>
+                        <input type="checkbox" id="toggleReceive" />
+                        <label htmlFor="toggleReceive"></label>
                     </div>
                 </li>
                 <li className="checkbox">

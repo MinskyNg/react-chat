@@ -1,10 +1,16 @@
+/**
+* 群组相关路由
+**/
+
+
 var bodyParser = require('body-parser');
 var Group = require('../models/Group');
 
 
 module.exports = function(router) {
-    router.use(bodyparser.json());
+    router.use(bodyParser.json());
 
+    // 获取所有群组
     router.get('/groups', function(req, res) {
         Group.find({}, function(err, docs) {
             if (err) {
@@ -16,8 +22,9 @@ module.exports = function(router) {
         });
     });
 
+    // 获取指定群组
     router.get('/groups/:name', function(req, res) {
-        Group.findOne({ name: req.params.name } function(err, doc) {
+        Group.findOne({ name: req.params.name }, function(err, doc) {
             if (err) {
                 console.log(err);
                 return res.status(500).json({ msg: 'internal server error' });
@@ -27,10 +34,11 @@ module.exports = function(router) {
         });
     });
 
+    // 创建群组
     router.post('/groups/:name', function(req, res) {
         var newGroup = new Group(req.body);
         newGroup.save(function(err, doc) {
-            res.json(doc);
-        })
-    })
+            res.json({ success: true, group: doc });
+        });
+    });
 };

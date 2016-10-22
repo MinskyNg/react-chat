@@ -8,6 +8,14 @@ import { connect } from 'react-redux';
 
 
 class Sign extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            height: this.props.fullScreen ? document.body.scrollHeight : document.body.scrollHeight - 60
+        };
+        this.updateHeight = this.updateHeight.bind(this);
+    }
+
     render() {
         return (
             <div className="sign">
