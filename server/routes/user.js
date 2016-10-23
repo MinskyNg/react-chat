@@ -9,6 +9,8 @@ var User = require('../models/User.js');
 
 module.exports = function(router, onlineUsers) {
     router.use(bodyParser.json());
+    router.use(bodyParser.urlencoded({ extended: false }));
+
 
     // 登录
     router.post('/signin', function(req, res) {
@@ -26,7 +28,7 @@ module.exports = function(router, onlineUsers) {
     });
 
     // 注册
-    router.post('/signup', function(req, res) {
+    router.post('/user', function(req, res) {
         User.find({ username: req.body.username }, function(err, docs) {
             if (docs.length === 0) {
                 req.body.password = User.generateHash(req.body.password);
@@ -40,13 +42,17 @@ module.exports = function(router, onlineUsers) {
         });
     });
 
-    // 获取在线用户列表
-    router.get('/users', function(req, res) {
-        res.json({ onlineUsers });
+    // 修改用户资料
+    router.put('/user', function(req, res) {
+        User.update({ username: req.body.username },
+            ({ $set: { signature: req.body.signature, avatar: req.body.avatar } }),
+            function(err, docs) {
+                res.json({ sucess: true, user: docs[0] });
+            });
     });
 
-    // 获取指定用户资料
-    router.get('/users/:username', function(req, res) {
+    // 获取用户资料
+    router.get('/user/:username', function(req, res) {
         User.findOne({ username: req.params.username },
             ['username', 'signature', 'avatar', 'date'],
             function(err, doc) {
@@ -59,12 +65,8 @@ module.exports = function(router, onlineUsers) {
             });
     });
 
-    // 修改指定用户资料
-    router.put('/users/:username', function(req, res) {
-        User.update({ username: req.params.username },
-            ({ $set: { signature: req.body.signature, avatar: req.body.avatar } }),
-            function(err, docs) {
-                res.json({ success: true });
-            });
+    // 获取在线用户列表
+    router.get('/users', function(req, res) {
+        res.json(onlineUsers);
     });
 };

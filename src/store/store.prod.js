@@ -18,10 +18,14 @@ const initialState = fromJS({
     groups: [{ name: 'Group', signature: '聊天室默认群组', avatar: 'groupdefult' }],
     userMsg: {},
     groupMsg: {},
-    receive: true,
-    sound: true,
-    notice: true,
-    screen: false
+    warning: '',
+    modal: 0,
+    set: {
+        receive: true,
+        sound: true,
+        notice: true,
+        screen: false
+    }
 });
 
 

@@ -9,6 +9,8 @@ var Group = require('../models/Group');
 
 module.exports = function(router) {
     router.use(bodyParser.json());
+    router.use(bodyParser.urlencoded({ extended: false }));
+
 
     // 获取所有群组
     router.get('/groups', function(req, res) {
@@ -23,7 +25,7 @@ module.exports = function(router) {
     });
 
     // 获取指定群组
-    router.get('/groups/:name', function(req, res) {
+    router.get('/group/:name', function(req, res) {
         Group.findOne({ name: req.params.name }, function(err, doc) {
             if (err) {
                 console.log(err);
@@ -35,10 +37,17 @@ module.exports = function(router) {
     });
 
     // 创建群组
-    router.post('/groups/:name', function(req, res) {
-        var newGroup = new Group(req.body);
-        newGroup.save(function(err, doc) {
-            res.json({ success: true, group: doc });
+    router.post('/group', function(req, res) {
+        Group.find({ name: req.body.name }, function(err, docs) {
+            if (docs.length === 0) {
+                var newGroup = new Group(req.body);
+                newGroup.save(function(err, doc) {
+                    res.json({ success: true, group: doc });
+                });
+            } else {
+                res.json({ success: false, msg: '群组名已存在' });
+            }
         });
+
     });
 };

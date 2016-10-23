@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute, Redirect, withRouter } from 'react-router';
+import { Route, IndexRoute, Redirect } from 'react-router';
 import App from './containers/App';
 import Chat from './containers/Chat';
 import Sign from './containers/Sign';
@@ -18,8 +18,8 @@ export default (store) => {
     return (
         <Route path="/" component={App}>
             <IndexRoute component={Chat} onEnter={requireUser(store)} />
-            <Route path="sign" component={withRouter(Sign)} />
-            // <Route path="404" component={withRouter(Notfound)} />
+            <Route path="sign" component={Sign} />
+            // <Route path="404" component={Notfound} />
             // <Redirect from="*" to="/404" />
         </Route>
     );

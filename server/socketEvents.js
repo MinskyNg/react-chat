@@ -14,15 +14,10 @@ exports = module.exports = function(io, onlineUsers) {
         // 用户上线
         socket.on('online', function(data) {
             socket.name = data.username;
-            var user = {
-                username: data.username,
-                signature: data.signature,
-                avatar: data.avatar
-            };
-            onlineUsers.push(user);
+            onlineUsers.push(data);
             sockets[data.username] = socket;
             socket.join('Group');
-            io.emit('online', user);
+            io.emit('online', data);
         });
 
 
@@ -54,6 +49,20 @@ exports = module.exports = function(io, onlineUsers) {
                 io.to(data.target).emit('message', data);
             } else {
                 sockets[data.target].emit('message', data);
+            }
+        });
+
+
+        // 用户下线
+        socket.on('offline', function() {
+            for (var i = 0, len = onlineUsers.length; i < len; i++) {
+                if (onlineUsers[i].username === socket.name) {
+                    onlineUsers.splice(i, 1);
+                    delete sockets[socket.name];
+                    socket.broadcast.emit('offline', {
+                        username: socket.name
+                    });
+                }
             }
         });
 
