@@ -21,7 +21,6 @@ export default class Model extends React.PureComponent {
                     />
                     :
                     <EditGroup
-                      groups={this.props.groups}
                       warning={this.props.warning}
                       createGroup={this.props.createGroup}
                       closeModal={() => this.props.closeModal()}

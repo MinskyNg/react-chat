@@ -3,11 +3,9 @@ import user from './user';
 import target from './target';
 import users from './users';
 import groups from './groups';
-import userMsg from './userMsg';
-import groupMsg from './groupMsg';
 import warning from './warning';
 import modal from './modal';
-import set from './set';
+import sets from './sets';
 
 
 export default combineReducers({
@@ -15,9 +13,7 @@ export default combineReducers({
     target,
     users,
     groups,
-    userMsg,
-    groupMsg,
     warning,
     modal,
-    set
+    sets
 });

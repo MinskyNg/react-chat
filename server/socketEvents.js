@@ -25,7 +25,7 @@ exports = module.exports = function(io, onlineUsers) {
         socket.on('join group', function(data) {
             var name = data.name;
             socket.join(name);
-            io.to(name).emit('join group', { username: socket.name });
+            socket.broadcast.to(name).emit('join group', { username: socket.name });
         });
 
 
@@ -33,7 +33,7 @@ exports = module.exports = function(io, onlineUsers) {
         socket.on('leave group', function(data) {
             var name = data.name;
             socket.leave(name);
-            io.to(name).emit('leave group', { username: socket.name });
+            socket.broadcast.to(name).emit('leave group', { username: socket.name });
         });
 
 
@@ -44,11 +44,13 @@ exports = module.exports = function(io, onlineUsers) {
 
 
         // 发送信息
-        socket.on('message', function(data) {
+        socket.on('new message', function(data) {
             if (!data.private) {
-                io.to(data.target).emit('message', data);
+                io.to(data.target).emit('new message', data);
             } else {
-                sockets[data.target].emit('message', data);
+                if (sockets[data.target]) {
+                    sockets[data.target].emit('new message', data);
+                }
             }
         });
 

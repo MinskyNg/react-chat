@@ -3,7 +3,7 @@ import { TOGGLE_RECEIVE, TOGGLE_SOUND, TOGGLE_NOTICE, TOGGLE_SCREEN }
 import { Map } from 'immutable';
 
 
-export default function set(state = Map({
+export default function sets(state = Map({
     receive: true, sound: true, notice: true, screen: false
 }), action) {
     switch (action.type) {

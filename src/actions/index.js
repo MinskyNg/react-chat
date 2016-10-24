@@ -1,5 +1,5 @@
 import { CHANGE_USER, CHANGE_TARGET, INIT_USERS, ADD_USER, REMOVE_USER,
-    INIT_GROUPS, ADD_GROUP, ADD_USER_MSG, ADD_GROUP_MSG, CHANGE_WARNING,
+    INIT_GROUPS, ADD_GROUP, ADD_MSG, CHANGE_WARNING,
     CHANGE_MODAL, TOGGLE_RECEIVE, TOGGLE_SOUND, TOGGLE_NOTICE, TOGGLE_SCREEN }
     from '../constants/actionTypes';
 import { browserHistory } from 'react-router';
@@ -30,8 +30,7 @@ export const addUser = makeActionCreator(ADD_USER, 'user');
 export const removeUser = makeActionCreator(REMOVE_USER, 'username');
 export const initGroups = makeActionCreator(INIT_GROUPS, 'groups');
 export const addGroup = makeActionCreator(ADD_GROUP, 'group');
-export const addUserMsg = makeActionCreator(ADD_USER_MSG, 'username', 'msg');
-export const addGroupMsg = makeActionCreator(ADD_GROUP_MSG, 'groupname', 'msg');
+export const addMsg = makeActionCreator(ADD_MSG, 'msg');
 export const changeWarning = makeActionCreator(CHANGE_WARNING, 'warning');
 export const changeModal = makeActionCreator(CHANGE_MODAL, 'modal');
 export const toggleReceive = makeActionCreator(TOGGLE_RECEIVE);
@@ -64,11 +63,6 @@ export function signin(newUser, keep) {
                 }
                 dispatch(changeWarning(''));
                 dispatch(changeUser(user));
-                socket.emit('online', {
-                    username: user.username,
-                    avatar: user.avatar,
-                    signature: user.signature
-                });
                 browserHistory.push('/');
             } else {
                 dispatch(changeUser(null));
@@ -99,11 +93,6 @@ export function signup(newUser, keep) {
                 }
                 dispatch(changeWarning(''));
                 dispatch(changeUser(user));
-                socket.emit('online', {
-                    username: user.username,
-                    avatar: user.avatar,
-                    signature: user.signature
-                });
                 browserHistory.push('/');
             } else {
                 dispatch(changeUser(null));
@@ -168,7 +157,10 @@ export function fetchGroups() {
 
 // 新建群组
 export function createGroup(newGroup) {
-    return dispatch => {
+    return (dispatch, getState) => {
+        if (getState().get('groups').findIndex(y => y.get('name') === newGroup.name) !== -1) {
+            return dispatch(changeWarning('该群组已存在'));
+        }
         return fetch('/group', {
             method: 'post',
             headers: {
@@ -193,3 +185,49 @@ export function createGroup(newGroup) {
     };
 }
 
+// 加入群组
+export function joinGroup(name) {
+    return (dispatch, getState) => {
+        const target = getState().get('target');
+        if (!target.get('private')) {
+            socket.emit('leave group', {
+                name: target.get('name')
+            });
+        }
+        socket.emit('join group', { name });
+        changeTarget({ private: false, name });
+    };
+}
+
+// 对用户私聊
+export function privateChat(name) {
+    return (dispatch, getState) => {
+        const target = getState().get('target');
+        if (!target.get('private')) {
+            socket.emit('leave group', {
+                name: target.get('name')
+            });
+        }
+        changeTarget({ private: true, name });
+    };
+}
+
+export function sendMsg(msg) {
+    return (dispatch, getState) => {
+        const target = getState().get('target');
+        let user;
+        if (target.private) {
+            user = getState().getIn(['user', 'username']);
+        } else {
+            user = getState().get('user');
+        }
+        socket.emit('new message', {
+            private: target.private,
+            target: target.name,
+            user,
+            type: msg.type,
+            text: msg.text,
+            time: msg.time
+        });
+    };
+}

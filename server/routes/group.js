@@ -45,7 +45,7 @@ module.exports = function(router) {
                     res.json({ success: true, group: doc });
                 });
             } else {
-                res.json({ success: false, msg: '群组名已存在' });
+                res.json({ success: false, msg: '该群组已存在' });
             }
         });
 

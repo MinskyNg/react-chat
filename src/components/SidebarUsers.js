@@ -8,6 +8,7 @@ import React from 'react';
 
 export default class SidebarUsers extends React.PureComponent {
     render() {
+        const { users, privateChat } = this.props;
         return (
             <ul>
                 <li>

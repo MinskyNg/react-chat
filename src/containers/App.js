@@ -31,12 +31,6 @@ export default class App extends React.PureComponent {
 
 App.propTypes = {
     user: PropTypes.object.isRequired,
-    groups: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        signature: PropTypes.string.isRequired,
-        avatar: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired
-    })).isRequired,
     warning: PropTypes.string.isRequired,
     modal: PropTypes.number.isRequired
 };
@@ -45,7 +39,6 @@ App.propTypes = {
 function selector(state) {
     return {
         user: state.get('user').toJS(),
-        groups: state.get('groups').toJS(),
         warning: state.get('warning'),
         modal: state.get('modal')
     };

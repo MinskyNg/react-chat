@@ -13,9 +13,15 @@ export default class Main extends React.PureComponent {
     render() {
         return (
             <div className="main">
-                <MainNav />
-                <MainMessages />
-                <MainInput />
+                <MainNav
+                  target={this.props.target}
+                />
+                <MainMessages
+                  msg={this.props.msg}
+                />
+                <MainInput
+                  sendMsg={newMsg => this.props.sendMsg(newMsg)}
+                />
             </div>
         );
     }

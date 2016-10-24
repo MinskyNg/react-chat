@@ -13,14 +13,12 @@ const user = JSON.parse(localStorage.getItem('user'));
 
 const initialState = fromJS({
     user,
-    target: { type: 'group', name: 'Group' },
+    target: { private: false, name: 'Group' },
     users: [],
-    groups: [{ name: 'Group', signature: '聊天室默认群组', avatar: 'groupdefult' }],
-    userMsg: {},
-    groupMsg: {},
+    groups: [{ name: 'Group', signature: '聊天室默认群组', avatar: 'groupdefult', msg: [] }],
     warning: '',
     modal: 0,
-    set: {
+    sets: {
         receive: true,
         sound: true,
         notice: true,

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute, Redirect } from 'react-router';
+import { socket } from '../actions';
 import App from './containers/App';
 import Chat from './containers/Chat';
 import Sign from './containers/Sign';
@@ -17,7 +18,7 @@ const requireUser = (store) => {
 export default (store) => {
     return (
         <Route path="/" component={App}>
-            <IndexRoute component={Chat} onEnter={requireUser(store)} />
+            <IndexRoute component={Chat} onEnter={requireUser(store)} onLeave={() => socket.emit('offline')} />
             <Route path="sign" component={Sign} />
             // <Route path="404" component={Notfound} />
             // <Redirect from="*" to="/404" />

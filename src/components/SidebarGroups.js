@@ -8,9 +8,13 @@ import React from 'react';
 
 export default class SidebarGroups extends React.PureComponent {
     render() {
+        const { groups, joinGroup } = this.props.joinGroup();
+
         return (
             <ul>
-                <button className="create-group">创建群组</button>
+                <button className="create-group" onClick={() => this.props.showEditGroup()}>
+                    创建群组
+                </button>
                 <li>
                     <div className="avatar">
                     </div>
