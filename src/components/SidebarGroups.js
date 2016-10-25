@@ -1,6 +1,6 @@
-/*
-侧边栏群组列表
-*/
+/**
+* 群组列表
+**/
 
 
 import React from 'react';
@@ -10,35 +10,28 @@ export default class SidebarGroups extends React.PureComponent {
     render() {
         const { groups, joinGroup } = this.props.joinGroup();
 
+        // 生成群组列表
+        let groupItems = groups.map(group => (
+            <li key={group.name} onClick={() => joinGroup(group.name)}>
+                <div className="avatar">
+                    <img
+                      src={`http://7xnpxz.com1.z0.glb.clouddn.com/${group.avatar}.png`}
+                      alt="头像"
+                    />
+                </div>
+                <div className="profile">
+                    <h4>{group.name}</h4>
+                    <p>{group.signature}</p>
+                </div>
+            </li>
+            ));
+
         return (
             <ul>
                 <button className="create-group" onClick={() => this.props.showEditGroup()}>
                     创建群组
                 </button>
-                <li>
-                    <div className="avatar">
-                    </div>
-                    <div className="profile">
-                        <h4>HAHA</h4>
-                        <p>我能吞下玻璃而不伤身体我能吞下玻璃而不伤身体我能吞</p>
-                    </div>
-                </li>
-                <li>
-                    <div className="avatar">
-                    </div>
-                    <div className="profile">
-                        <h4>HAHA</h4>
-                        <p>我能吞下玻璃而不伤身体我能吞下玻璃而不伤身体我能吞</p>
-                    </div>
-                </li>
-                <li>
-                    <div className="avatar">
-                    </div>
-                    <div className="profile">
-                        <h4>HAHA</h4>
-                        <p>我能吞下玻璃而不伤身体我能吞下玻璃而不伤身体我能吞</p>
-                    </div>
-                </li>
+                {groupItems}
             </ul>
         );
     }

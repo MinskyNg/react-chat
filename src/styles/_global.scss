@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #EEE;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Microsoft Yahei', Helvetica, Arial, sans-serif;
+}
+
+input, button, select, textarea {
+    outline: none;
+}
+
+button {
+    display: block;
+    border: 0;
+    cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+}
+
+h4 {
+    font-size: 1.6rem;
+    font-weight: 500;
+}

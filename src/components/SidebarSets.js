@@ -1,6 +1,6 @@
-/*
-侧边栏设置区
-*/
+/**
+* 侧边栏设置列表
+**/
 
 
 import React from 'react';

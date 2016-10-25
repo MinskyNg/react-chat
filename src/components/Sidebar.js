@@ -1,6 +1,6 @@
-/*
-侧边栏
-*/
+/**
+* 侧边栏
+**/
 
 
 import React from 'react';

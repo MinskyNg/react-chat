@@ -1,6 +1,6 @@
-/*
-聊天室消息
-*/
+/**
+* 聊天室消息列表
+**/
 
 
 import React from 'react';
@@ -8,25 +8,53 @@ import React from 'react';
 
 export default class MainMessages extends React.PureComponent {
     render() {
-        return (
-            <div className="main-messages">
-                <div className="message-container">
+        const { user, msg } = this.props;
+        const { username, avatar } = user;
+
+        // 根据消息类型不同 生成消息列表
+        const msgItems = msg.map((msgItem, index) => {
+            if (msgItem.type === 'system') {
+                return (
+                    <div key={index} className="message-system">
+                        <span>{msgItem.text}</span>
+                    </div>
+                );
+            }
+            if (msgItem.sender === username) {
+                return (
+                    <div key={index} className="message-container message-self">
+                        <div className="message-sender">
+                            <img
+                              src={`http://7xnpxz.com1.z0.glb.clouddn.com/${avatar}.png`}
+                              alt="头像"
+                            />
+                        </div>
+                        <div className="message-content">
+                            <span>{`${username} ${msgItem.time}`}</span>
+                            <div>{msgItem.text}</div>
+                        </div>
+                    </div>
+                );
+            }
+            return (
+                <div key={index} className="message-container">
                     <div className="message-sender">
+                        <img
+                          src={`http://7xnpxz.com1.z0.glb.clouddn.com/${msgItem.avatar}.png`}
+                          alt="头像"
+                        />
                     </div>
                     <div className="message-content message-other">
-                        <span>Minsky 20:13</span>
-                        <div>我</div>
+                        <span>{`${msgItem.sender} ${msgItem.time}`}</span>
+                        <div>{msgItem.text}</div>
                     </div>
                 </div>
-                <div className="message-system"><span>用户 Minsky 已下线</span></div>
-                <div className="message-container message-self">
-                    <div className="message-sender">
-                    </div>
-                    <div className="message-content">
-                        <span>Minsky 20:14</span>
-                        <div>我能吞下玻璃而不伤身体我能吞下玻璃而不伤身体我能吞我能吞下玻</div>
-                    </div>
-                </div>
+            );
+        });
+
+        return (
+            <div className="main-messages">
+                {msgItems}
             </div>
         );
     }

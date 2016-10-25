@@ -1,5 +1,5 @@
 import { CHANGE_USER, CHANGE_TARGET, INIT_USERS, ADD_USER, REMOVE_USER,
-    INIT_GROUPS, ADD_GROUP, ADD_MSG, CHANGE_WARNING,
+    INIT_GROUPS, ADD_GROUP, ADD_GROUP_MSG, ADD_USER_MSG, ADD_SELF_MSG, CHANGE_WARNING,
     CHANGE_MODAL, TOGGLE_RECEIVE, TOGGLE_SOUND, TOGGLE_NOTICE, TOGGLE_SCREEN }
     from '../constants/actionTypes';
 import { browserHistory } from 'react-router';
@@ -23,20 +23,22 @@ function makeActionCreator(type, ...argNames) {
     };
 }
 
-export const changeUser = makeActionCreator(CHANGE_USER, 'user');
-export const changeTarget = makeActionCreator(CHANGE_TARGET, 'target');
-export const initUsers = makeActionCreator(INIT_USERS, 'users');
-export const addUser = makeActionCreator(ADD_USER, 'user');
-export const removeUser = makeActionCreator(REMOVE_USER, 'username');
-export const initGroups = makeActionCreator(INIT_GROUPS, 'groups');
-export const addGroup = makeActionCreator(ADD_GROUP, 'group');
-export const addMsg = makeActionCreator(ADD_MSG, 'msg');
-export const changeWarning = makeActionCreator(CHANGE_WARNING, 'warning');
-export const changeModal = makeActionCreator(CHANGE_MODAL, 'modal');
-export const toggleReceive = makeActionCreator(TOGGLE_RECEIVE);
-export const toggleSound = makeActionCreator(TOGGLE_SOUND);
-export const toggleNotice = makeActionCreator(TOGGLE_NOTICE);
-export const toggleScreen = makeActionCreator(TOGGLE_SCREEN);
+export const changeUser = makeActionCreator(CHANGE_USER, 'user');  // 改变用户
+export const changeTarget = makeActionCreator(CHANGE_TARGET, 'target');  // 改变消息对象
+export const initUsers = makeActionCreator(INIT_USERS, 'users');  // 初始化用户列表
+export const addUser = makeActionCreator(ADD_USER, 'user');  // 添加用户
+export const removeUser = makeActionCreator(REMOVE_USER, 'username');  // 删除用户
+export const initGroups = makeActionCreator(INIT_GROUPS, 'groups');  // 初始化群组列表
+export const addGroup = makeActionCreator(ADD_GROUP, 'group');  // 添加群组
+export const addGroupMsg = makeActionCreator(ADD_GROUP_MSG, 'msg');  // 添加群组消息
+export const addUserMsg = makeActionCreator(ADD_USER_MSG, 'msg');  // 添加用户消息
+export const addSelfMsg = makeActionCreator(ADD_SELF_MSG, 'msg');  // 添加本人消息
+export const changeWarning = makeActionCreator(CHANGE_WARNING, 'warning');  // 改变警告
+export const changeModal = makeActionCreator(CHANGE_MODAL, 'modal');  // 改变模态框
+export const toggleReceive = makeActionCreator(TOGGLE_RECEIVE);  // 切换接收私聊
+export const toggleSound = makeActionCreator(TOGGLE_SOUND);  // 切换声音提醒
+export const toggleNotice = makeActionCreator(TOGGLE_NOTICE);  // 切换桌面提醒
+export const toggleScreen = makeActionCreator(TOGGLE_SCREEN);  // 切换全屏显示
 
 
 /**
@@ -212,19 +214,33 @@ export function privateChat(name) {
     };
 }
 
+// 发送信息
 export function sendMsg(msg) {
     return (dispatch, getState) => {
-        const target = getState().get('target');
-        let user;
+        const sender = getState().get('user').toJS();
+        const target = getState().get('target').toJS();
         if (target.private) {
-            user = getState().getIn(['user', 'username']);
+            addGroupMsg({
+                target: target.name,
+                sender: sender.username,
+                type: msg.type,
+                text: msg.text,
+                time: msg.time
+            });
         } else {
-            user = getState().get('user');
+            addSelfMsg({
+                target: target.name,
+                sender: sender.username,
+                type: msg.type,
+                text: msg.text,
+                time: msg.time
+            });
         }
         socket.emit('new message', {
             private: target.private,
             target: target.name,
-            user,
+            sender: sender.username,
+            avatar: sender.avatar,
             type: msg.type,
             text: msg.text,
             time: msg.time

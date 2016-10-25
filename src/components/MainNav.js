@@ -1,6 +1,6 @@
-/*
-聊天室导航
-*/
+/**
+* 聊天室导航栏
+**/
 
 
 import React from 'react';
@@ -8,13 +8,17 @@ import React from 'react';
 
 export default class MainNav extends React.PureComponent {
     render() {
+        const targetProfile = this.props.targetProfile;
         return (
             <nav className="main-nav">
                 <div>
-                    <img src="" alt="头像" />
+                    <img
+                      src={`http://7xnpxz.com1.z0.glb.clouddn.com/${targetProfile.avatar}.png`}
+                      alt="头像"
+                    />
                 </div>
-                <h2>Minsky</h2>
-                <p>我能吞下玻璃而不伤身体我能吞下玻璃而不伤身体我能吞</p>
+                <h2>{targetProfile.name}</h2>
+                <p>{targetProfile.signature}</p>
             </nav>
         );
     }

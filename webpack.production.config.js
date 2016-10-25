@@ -46,7 +46,9 @@ module.exports = {
             'react-dom',
             'redux',
             'react-redux',
-            'redux-immutable'
+            'redux-immutable',
+            'immutable',
+            'react-router'
         ]
     },
     output: {

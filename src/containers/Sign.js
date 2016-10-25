@@ -1,5 +1,5 @@
 /**
-* 注册登录
+* 注册登录页
 **/
 
 
@@ -14,6 +14,7 @@ class Sign extends React.PureComponent {
         this.state = { signinPage: true };
     }
 
+    // 处理提交注册登录
     handleSubmit(event) {
         event.preventDefault();
         const username = this._username.value.replace(/(^\s*)|(\s*$)/g, '');
@@ -22,6 +23,7 @@ class Sign extends React.PureComponent {
             this.props.dispatch(changeWarning('用户名或密码不能为空'));
             return;
         }
+        // 判断是登陆或注册
         if (this.state.signinPage) {
             this.props.dispatch(signin({ username, password }, this._keepSigned.checked));
         } else {
@@ -38,6 +40,7 @@ class Sign extends React.PureComponent {
 
     render() {
         const signinPage = this.state.signinPage;
+
         const inStyle = {
             cursor: signinPage ? 'default' : 'pointer',
             borderBottomWidth: signinPage ? '2px' : '0',
@@ -46,6 +49,7 @@ class Sign extends React.PureComponent {
             cursor: signinPage ? 'pointer' : 'default',
             borderBottomWidth: signinPage ? '0' : '2px',
         };
+
         return (
             <div className="sign">
                 <div className="sign-choic">

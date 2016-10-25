@@ -3,10 +3,11 @@
 **/
 
 
-import React from './react';
+import React from 'react';
 
 
 export default class EditGroup extends React.PureComponent {
+    // 处理提交资料
     handleSubmit(event) {
         event.preventDefault();
         const name = this._name.value.replace(/(^\s*)|(\s*$)/g, '');

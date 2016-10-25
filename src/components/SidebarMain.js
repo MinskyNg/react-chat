@@ -1,6 +1,6 @@
-/*
-侧边栏主体
-*/
+/**
+* 侧边栏主体
+**/
 
 
 import React from 'react';
@@ -16,6 +16,36 @@ export default class SidebarMain extends React.PureComponent {
     }
 
     render() {
+        const content = this.state.content;
+
+        // 根据状态展示不同列表
+        let SideBarList;
+        if (content === 1) {
+            SideBarList = (
+                <SidebarUsers
+                  users={this.props.users}
+                  privateChat={name => this.props.privateChat(name)}
+                />
+            );
+        } else if (content === 2) {
+            SideBarList = (
+                <SidebarGroups
+                  groups={this.props.groups}
+                  joinGroup={name => this.props.joinGroup(name)}
+                  showEditGroup={() => this.props.showEditGroup()}
+                />
+            );
+        } else {
+            SideBarList = (
+                <SidebarSets
+                  sets={this.props.sets}
+                  toggleReceive={() => this.props.toggleReceive()}
+                  toggleSound={() => this.props.toggleSound()}
+                  toggleNotice={() => this.props.toggleNotice()}
+                  toggleScreen={() => this.props.toggleScreen()}
+                />
+            );
+        }
         return (
             <div className="sidebar-main">
                 <div className="sidebar-menu">
@@ -24,28 +54,7 @@ export default class SidebarMain extends React.PureComponent {
                     <button onClick={() => this.setState({ content: 3 })}>设置</button>
                 </div>
                 <div className="sidebar-content">
-                    {
-                        if (this.state.content === 1) {
-                            return <SidebarUsers
-                                      users={this.props.users}
-                                      privateChat={name => this.props.privateChat(name)}
-                                    />
-                        } else if (this.state.content === 2) {
-                            return <SidebarGroups
-                                      groups={this.props.groups}
-                                      joinGroup={name => this.props.joinGroup(name)}
-                                      showEditGroup={() => this.props.showEditGroup()}
-                                    />
-                        } else {
-                            return <SidebarSets
-                                      sets={this.props.sets}
-                                      toggleReceive={() => this.props.toggleReceive()}
-                                      toggleSound={() => this.props.toggleSound()}
-                                      toggleNotice={() => this.props.toggleNotice()}
-                                      toggleScreen={() => this.props.toggleScreen()}
-                                    />
-                        }
-                    }
+                    {SideBarList}
                 </div>
             </div>
         );

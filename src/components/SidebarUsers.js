@@ -1,6 +1,6 @@
-/*
-侧边栏用户列表
-*/
+/**
+* 侧边栏用户列表
+**/
 
 
 import React from 'react';
@@ -9,32 +9,26 @@ import React from 'react';
 export default class SidebarUsers extends React.PureComponent {
     render() {
         const { users, privateChat } = this.props;
+
+        // 生成用户列表
+        let userItems = users.map(user => (
+            <li key={user.username} onClick={() => privateChat(user.username)}>
+                <div className="avatar">
+                    <img
+                      src={`http://7xnpxz.com1.z0.glb.clouddn.com/${user.avatar}.png`}
+                      alt="头像"
+                    />
+                </div>
+                <div className="profile">
+                    <h4>{user.username}</h4>
+                    <p>{user.signature}</p>
+                </div>
+            </li>
+        ));
+
         return (
             <ul>
-                <li>
-                    <div className="avatar">
-                    </div>
-                    <div className="profile">
-                        <h4>HAHA</h4>
-                        <p>我能吞下玻璃而不伤身体我能吞下玻璃而不伤身体我能吞</p>
-                    </div>
-                </li>
-                <li>
-                    <div className="avatar">
-                    </div>
-                    <div className="profile">
-                        <h4>HAHA</h4>
-                        <p>我能吞下玻璃而不伤身体我能吞下玻璃而不伤身体我能吞</p>
-                    </div>
-                </li>
-                <li>
-                    <div className="avatar">
-                    </div>
-                    <div className="profile">
-                        <h4>HAHA</h4>
-                        <p>我能吞下玻璃而不伤身体我能吞下玻璃而不伤身体我能吞</p>
-                    </div>
-                </li>
+                {userItems}
             </ul>
         );
     }

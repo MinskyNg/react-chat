@@ -3,7 +3,7 @@
 **/
 
 
-import React from './react';
+import React from 'react';
 import EditUser from './EditUser';
 import EditGroup from './EditGroup';
 

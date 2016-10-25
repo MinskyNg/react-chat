@@ -3,10 +3,11 @@
 **/
 
 
-import React from './react';
+import React from 'react';
 
 
 export default class EditUser extends React.PureComponent {
+    // 处理用户资料变更
     handleClick() {
         const avatar = this._avatar.src.replace(/(^\s*)|(\s*$)/g, '');
         const signature = this._signature.value.replace(/(^\s*)|(\s*$)/g, '');

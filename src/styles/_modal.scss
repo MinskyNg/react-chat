@@ -1,0 +1,214 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    z-index: 9;
+}
+
+.edit-user {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 290px;
+    margin-top: -145px;
+    margin-left: -150px;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+    z-index: 10;
+
+    div {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        margin: 8px auto 0;
+        border-radius: 50%;
+        cursor: pointer;
+        &:hover span {
+            visibility: visible;
+            opacity: .8;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+        span {
+            position: absolute;
+            bottom: 0;
+            font-size: 1.5rem;
+            font-weight: 500;
+            text-align: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: .4s all linear;
+        }
+    }
+
+    h2 {
+        height: 4rem;
+        margin: 0;
+        font-size: 2rem;
+        text-align: center;
+        line-height: 4rem;
+        border-bottom: 1px solid #CCC;
+    }
+
+    p {
+        font-size: 1.6rem;
+        margin: 1em;
+    }
+
+    label {
+        float: left;
+        margin: .4em 0 0 1em;
+        font-size: 1.6rem;
+    }
+
+    input {
+        float: left;
+        width: 220px;
+        height: 30px;
+        padding: 8px;
+        margin: 0;
+        margin-bottom: 13px;
+        border: 1px #CCC solid;
+        border-radius: 5px;
+        font-size: 1.6rem;
+        transition: all 0.2s linear;
+        &:focus {
+            border-color: #A6A6A6;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(211, 211, 211, .6);
+        }
+    }
+
+    button {
+        float: left;
+        width: 100px;
+        height: 30px;
+        padding: 3px;
+        margin-left: 16px;
+        border: 1px #CCC solid;
+        border-radius: 5px;
+        background-color: #FFF;
+        cursor: pointer;
+        transition: .4s all linear;
+        &:hover {
+            color: #FFF;
+            background-color: #4385F5;
+        }
+        &:last-child {
+            margin-left: 60px;
+        }
+    }
+}
+
+.edit-group {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 310px;
+    margin-top: -155px;
+    margin-left: -150px;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+    z-index: 10;
+
+    div {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        margin: 8px auto 0;
+        border-radius: 50%;
+        cursor: pointer;
+        &:hover span {
+            visibility: visible;
+            opacity: .8;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+        span {
+            position: absolute;
+            bottom: 0;
+            font-size: 1.5rem;
+            font-weight: 500;
+            text-align: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: .4s all linear;
+        }
+    }
+
+    h2 {
+        height: 4rem;
+        margin: 0;
+        font-size: 2rem;
+        text-align: center;
+        line-height: 4rem;
+        border-bottom: 1px solid #CCC;
+    }
+
+    form {
+        font-size: 1.6rem;
+    }
+
+    input[type=text] {
+        display: block;
+        width: 90%;
+        height: 30px;
+        margin: 5px auto;
+        border: 1px #CCC solid;
+        border-radius: 5px;
+    }
+
+    textarea {
+        display: block;
+        width: 90%;
+        height: 80px;
+        margin: 8px auto;
+        border: 1px #CCC solid;
+        border-radius: 5px;
+        resize: none;
+    }
+
+    input[type="submit"] {
+        float: left;
+        width: 100px;
+        height: 30px;
+        padding: 3px;
+        margin-left: 15px;
+        border: 1px #CCC solid;
+        border-radius: 5px;
+        background-color: #FFF;
+        cursor: pointer;
+        transition: .4s all linear;
+        &:hover {
+            color: #FFF;
+            background-color: #4385F5;
+        }
+    }
+
+    input[type="button"] {
+        float: right;
+        width: 100px;
+        height: 30px;
+        padding: 3px;
+        margin-right: 15px;
+        border: 1px #CCC solid;
+        border-radius: 5px;
+        background-color: #FFF;
+        cursor: pointer;
+        transition: .4s all linear;
+        &:hover {
+            color: #FFF;
+            background-color: #4385F5;
+        }
+    }
+}

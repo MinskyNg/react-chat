@@ -1,6 +1,6 @@
-/*
-聊天室主体
-*/
+/**
+* 聊天室主体
+**/
 
 
 import React from 'react';
@@ -14,9 +14,10 @@ export default class Main extends React.PureComponent {
         return (
             <div className="main">
                 <MainNav
-                  target={this.props.target}
+                  targetProfile={this.props.targetProfile}
                 />
                 <MainMessages
+                  user={this.props.user}
                   msg={this.props.msg}
                 />
                 <MainInput

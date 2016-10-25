@@ -91,7 +91,7 @@ if (app.get('env') === 'development') {
 **/
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-require('./socketEvents')(io);
+require('./socketEvents')(io, onlineUsers);
 server.listen(app.get('port'), function() {
     console.log('Server runing at port:' + app.get('port'));
 });

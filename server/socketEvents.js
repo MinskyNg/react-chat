@@ -3,7 +3,7 @@
 **/
 
 
-var User = require('models/User.js');
+var User = require('./models/User.js');
 
 exports = module.exports = function(io, onlineUsers) {
     io.on('connection', function(socket) {
@@ -46,7 +46,7 @@ exports = module.exports = function(io, onlineUsers) {
         // 发送信息
         socket.on('new message', function(data) {
             if (!data.private) {
-                io.to(data.target).emit('new message', data);
+                io.broadcast.to(data.target).emit('new message', data);
             } else {
                 if (sockets[data.target]) {
                     sockets[data.target].emit('new message', data);
