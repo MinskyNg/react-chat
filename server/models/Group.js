@@ -9,7 +9,8 @@ var mongoose = require('mongoose');
 var groupSchema = mongoose.Schema({
     name: { type: String, unique: true },
     signature: { type: String, default: '' },
-    avatar: { type: String, default: 'groupdefult' }
+    avatar: { type: String, default: 'groupdefault' },
+    msg: []
 });
 
 

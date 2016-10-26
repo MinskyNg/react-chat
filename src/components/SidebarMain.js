@@ -18,6 +18,8 @@ export default class SidebarMain extends React.PureComponent {
     render() {
         const content = this.state.content;
 
+        let activeStyle = { borderBottom: '2px solid #4385F5', color: '#4385F5' };
+
         // 根据状态展示不同列表
         let SideBarList;
         if (content === 1) {
@@ -49,9 +51,18 @@ export default class SidebarMain extends React.PureComponent {
         return (
             <div className="sidebar-main">
                 <div className="sidebar-menu">
-                    <button onClick={() => this.setState({ content: 1 })}>用户</button>
-                    <button onClick={() => this.setState({ content: 2 })}>群组</button>
-                    <button onClick={() => this.setState({ content: 3 })}>设置</button>
+                    <button
+                      onClick={() => this.setState({ content: 1 })}
+                      style={ content === 1 ? activeStyle : {} }
+                    >用户</button>
+                    <button
+                      onClick={() => this.setState({ content: 2 })}
+                      style={ content === 2 ? activeStyle : {} }
+                    >群组</button>
+                    <button
+                      onClick={() => this.setState({ content: 3 })}
+                      style={ content === 3 ? activeStyle : {} }
+                    >设置</button>
                 </div>
                 <div className="sidebar-content">
                     {SideBarList}

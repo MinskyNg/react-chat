@@ -1,6 +1,6 @@
 .message-container {
     display: flex;
-    margin: 20px 15px;
+    margin: 30px 15px;
 }
 
 .message-sender {
@@ -17,11 +17,13 @@
 .message-content {
     flex: 1;
     margin-left: 10px;
-    font-size: 1.5rem;
-    span {
-        display: block;
+    font-size: 1.6rem;
+    .message-time {
+        margin-left: .8em;
+        color: #444;
+        font-size: 1.4rem;
     }
-    div {
+    .message-text {
         display: inline-block;
         position: relative;
         margin-top: 5px;
@@ -34,7 +36,7 @@
 }
 
 .message-other {
-    div:before {
+    .message-text:before {
         content: "";
         position: absolute;
         top: 0;
@@ -56,7 +58,7 @@
         order: 1;
         margin-right: 10px;
         text-align: right;
-        div {
+        .message-text {
             text-align: left;
             background-color: #CEEBFD;
             &:before {
@@ -77,6 +79,7 @@
 
 .message-system {
     text-align: center;
+    margin: 1em 0 ;
     span {
         display: inline-block;
         padding: 0 10px;

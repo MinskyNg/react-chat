@@ -9,13 +9,11 @@ import { fromJS } from 'immutable';
 import rootReducer from '../reducers';
 
 
-const user = JSON.parse(localStorage.getItem('user'));
-
 const initialState = fromJS({
-    user,
+    user: null,
     target: { private: false, name: 'Group' },
     users: [],
-    groups: [{ name: 'Group', signature: '聊天室默认群组', avatar: 'groupdefult', msg: [] }],
+    groups: [{ name: 'Group', signature: '聊天室默认群组', avatar: 'groupdefault', msg: [] }],
     warning: '',
     modal: 0,
     sets: {

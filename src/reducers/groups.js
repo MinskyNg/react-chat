@@ -1,16 +1,16 @@
 import { INIT_GROUPS, ADD_GROUP, ADD_GROUP_MSG } from '../constants/actionTypes';
-import { fromJS, Map } from 'immutable';
+import { fromJS, Map, List } from 'immutable';
 
 
 /**
 * 群组数据
 **/
-export default function groups(state = fromJS([{ name: 'Group', signature: '聊天室默认群组', avatar: 'groupdefult', msg: [] }]), action) {
+export default function groups(state = List(), action) {
     switch (action.type) {
         case INIT_GROUPS:
             return fromJS(action.groups);
         case ADD_GROUP:
-            return state.push(Map(action.group));
+            return state.push(fromJS(action.group));
         case ADD_GROUP_MSG:
             const msg = action.msg;
             return state.update(state.findIndex(y => y.get('name') === msg.target),

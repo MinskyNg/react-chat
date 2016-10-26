@@ -19,6 +19,13 @@ module.exports = function(router, onlineUsers) {
                 res.json({ success: false, msg: '用户名不存在' });
             } else {
                 if (docs[0].validPassword(req.body.password)) {
+                    // 防止重复登录
+                    for (var i = 0, len = onlineUsers.length; i < len; i++) {
+                        if (onlineUsers[i] && onlineUsers[i].username === req.body.username) {
+                            res.json({ success: false, msg: '当前用户已登录' });
+                            return;
+                        }
+                    }
                     res.json({ success: true, user: docs[0] });
                 } else {
                     res.json({ success: false, msg: '密码错误' });
@@ -34,7 +41,7 @@ module.exports = function(router, onlineUsers) {
                 req.body.password = User.generateHash(req.body.password);
                 var newUser = new User(req.body);
                 newUser.save(function(err, doc) {
-                    res.json({ sucess: true, user: doc });
+                    res.json({ success: true, user: doc });
                 });
             } else {
                 res.json({ success: false, msg: '用户名已存在' });
@@ -46,8 +53,12 @@ module.exports = function(router, onlineUsers) {
     router.put('/user', function(req, res) {
         User.update({ username: req.body.username },
             ({ $set: { signature: req.body.signature, avatar: req.body.avatar } }),
-            function(err, docs) {
-                res.json({ sucess: true, user: docs[0] });
+            function(err) {
+                if (err) {
+                    res.json({ success: false });
+                } else {
+                    res.json({ success: true });
+                }
             });
     });
 

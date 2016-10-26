@@ -10,8 +10,9 @@ export default class EditGroup extends React.PureComponent {
     // 处理提交资料
     handleSubmit(event) {
         event.preventDefault();
+        const reg = this._avatar.src.match(/^http:\/\/7xnpxz.com1.z0.glb.clouddn.com\/(\S+).png$/);
+        const avatar = (reg && reg[1]);
         const name = this._name.value.replace(/(^\s*)|(\s*$)/g, '');
-        const avatar = this._avatar.src.replace(/(^\s*)|(\s*$)/g, '');
         const signature = this._signature.value.replace(/(^\s*)|(\s*$)/g, '');
         this.props.createGroup({
             name,
@@ -46,7 +47,11 @@ export default class EditGroup extends React.PureComponent {
                       maxLength="30"
                     ></textarea>
                     <input type="submit" value="确认" />
-                    <input type="button" value="取消" onClick={() => closeModal()} />
+                    <input type="button" value="取消" onClick={() => {
+                        this.props.closeModal();
+                        this.props.clearWarning();
+                    }}
+                    />
                 </form>
             </div>
         );

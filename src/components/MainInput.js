@@ -16,12 +16,15 @@ export default class MainInput extends React.PureComponent {
         const text = this._text.value.replace(/(^\s*)|(\s*$)/g, '');
         if (text !== '') {
             let time = new Date();
-            time = `${time.getHours()}:${time.getMinutes()}`;
+            const hour = time.getHours();
+            const min = time.getMinutes();
+            time = `${hour < 10 ? (`0${hour}`) : hour}:${min < 10 ? (`0${min}`) : min}`;
             this.props.sendMsg({
                 type: 'plain',
                 text,
                 time,
             });
+            this._text.value = '';
         }
     }
 

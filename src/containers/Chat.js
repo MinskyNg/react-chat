@@ -10,13 +10,14 @@ import Main from '../components/Main';
 import Model from '../components/Model';
 import { socket, fetchUsers, fetchGroups, signout, updateUser, createGroup,
     joinGroup, privateChat, sendMsg, initUsers, addUser, removeUser, addGroup,
-    addGroupMsg, addUserMsg, changeModal, toggleReceive, toggleSound, toggleNotice,
-    toggleScreen } from '../actions';
+    addGroupMsg, addUserMsg, changeWarning, changeModal,
+    toggleReceive, toggleSound, toggleNotice, toggleScreen } from '../actions';
 
 
 class Chat extends React.PureComponent {
     componentDidMount() {
-        const { dispatch, user, target } = this.props;
+        this.target = this.props.target;
+        const { dispatch, user } = this.props;
         const addGroupMsgA = msg => dispatch(addGroupMsg(msg));
         const addUserMsgA = msg => dispatch(addUserMsg(msg));
 
@@ -24,42 +25,35 @@ class Chat extends React.PureComponent {
         dispatch(fetchUsers());
         dispatch(fetchGroups());
 
-        // 发布用户上线消息
-        socket.emit('online', {
-            username: user.username,
-            avatar: user.avatar,
-            signature: user.signature,
-            msg: []
-        });
 
         // 用户上线
         socket.on('online', data => {
             if (data.username === this.props.user.username) {
-                if (target.private) {
+                if (this.target.private) {
                     addUserMsgA({
-                        target: target.name,
+                        target: this.target.name,
                         type: 'system',
                         text: '欢迎进入聊天室'
                     });
                 } else {
                     addGroupMsgA({
-                        target: target.name,
+                        target: this.target.name,
                         type: 'system',
                         text: '欢迎进入聊天室'
                     });
                 }
             } else {
-                if (target.private) {
+                if (this.target.private) {
                     addUserMsgA({
-                        target: target.name,
+                        target: this.target.name,
                         type: 'system',
-                        text: `用户 ${data.username} 上线`
+                        text: `用户 ${data.username} 上线了`
                     });
                 } else {
                     addGroupMsgA({
-                        target: target.name,
+                        target: this.target.name,
                         type: 'system',
-                        text: `用户 ${data.username} 上线`
+                        text: `用户 ${data.username} 上线了`
                     });
                 }
                 dispatch(addUser(data));
@@ -68,15 +62,15 @@ class Chat extends React.PureComponent {
 
         // 加入群组
         socket.on('join group', data => {
-            if (target.private) {
+            if (this.target.private) {
                 addUserMsgA({
-                    target: target.name,
+                    target: this.target.name,
                     type: 'system',
                     text: `用户 ${data.username} 加入了群组`
                 });
             } else {
                 addGroupMsgA({
-                    target: target.name,
+                    target: this.target.name,
                     type: 'system',
                     text: `用户 ${data.username} 加入了群组`
                 });
@@ -85,15 +79,15 @@ class Chat extends React.PureComponent {
 
         // 离开群组
         socket.on('leave group', data => {
-            if (target.private) {
+            if (this.target.private) {
                 addUserMsgA({
-                    target: target.name,
+                    target: this.target.name,
                     type: 'system',
                     text: `用户 ${data.username} 离开了群组`
                 });
             } else {
                 addGroupMsgA({
-                    target: target.name,
+                    target: this.target.name,
                     type: 'system',
                     text: `用户 ${data.username} 离开了群组`
                 });
@@ -116,17 +110,17 @@ class Chat extends React.PureComponent {
 
         // 用户下线
         socket.on('offline', data => {
-            if (target.private) {
+            if (this.target.private) {
                 addUserMsgA({
-                    target: target.name,
+                    target: this.target.name,
                     type: 'system',
-                    text: `用户 ${data.username} 下线`
+                    text: `用户 ${data.username} 下线了`
                 });
             } else {
                 addGroupMsgA({
-                    target: target.name,
+                    target: this.target.name,
                     type: 'system',
-                    text: `用户 ${data.username} 下线`
+                    text: `用户 ${data.username} 下线了`
                 });
             }
             dispatch(removeUser(data.username));
@@ -134,15 +128,15 @@ class Chat extends React.PureComponent {
 
         // 断开连接
         socket.on('disconnect', () => {
-            if (target.private) {
+            if (this.target.private) {
                 addUserMsgA({
-                    target: target.name,
+                    target: this.target.name,
                     type: 'system',
                     text: '连接服务器失败'
                 });
             } else {
                 addGroupMsgA({
-                    target: target.name,
+                    target: this.target.name,
                     type: 'system',
                     text: '连接服务器失败'
                 });
@@ -152,15 +146,15 @@ class Chat extends React.PureComponent {
 
         // 重新连接
         socket.on('reconnect', () => {
-            if (target.private) {
+            if (this.target.private) {
                 addUserMsgA({
-                    target: target.name,
+                    target: this.target.name,
                     type: 'system',
                     text: '重新连接服务器'
                 });
             } else {
                 addGroupMsgA({
-                    target: target.name,
+                    target: this.target.name,
                     type: 'system',
                     text: '重新连接服务器'
                 });
@@ -175,8 +169,14 @@ class Chat extends React.PureComponent {
         });
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.target !== nextProps.target) {
+            this.target = nextProps.target;
+        }
+    }
+
     render() {
-        const { dispatch, user, target, users, groups, sets } = this.props;
+        const { dispatch, user, target, users, groups, warning, modal, sets } = this.props;
 
         // 筛选当前消息和聊天对象资料
         let msg = [];
@@ -232,13 +232,14 @@ class Chat extends React.PureComponent {
                   sendMsg={newMsg => dispatch(sendMsg(newMsg))}
                 />
                 <Model
-                  user={this.props.user}
-                  groups={this.props.groups}
-                  warning={this.props.warning}
-                  modal={this.props.modal}
-                  updateUser={newUser => this.props.dispatch(updateUser(newUser))}
-                  createGroup={newGroup => this.props.dispatch(createGroup(newGroup))}
-                  closeModal={() => changeModal(0)}
+                  user={user}
+                  groups={groups}
+                  warning={warning}
+                  modal={modal}
+                  updateUser={newUser => dispatch(updateUser(newUser))}
+                  createGroup={newGroup => dispatch(createGroup(newGroup))}
+                  clearWarning={() => dispatch(changeWarning(''))}
+                  closeModal={() => dispatch(changeModal(0))}
                 />
             </div>
         );
@@ -261,6 +262,8 @@ Chat.propTypes = {
         avatar: PropTypes.string.isRequired,
         msg: PropTypes.array
     })).isRequired,
+    warning: PropTypes.string.isRequired,
+    modal: PropTypes.number.isRequired,
     sets: PropTypes.shape({
         receive: PropTypes.bool.isRequired,
         sound: PropTypes.bool.isRequired,
@@ -276,6 +279,8 @@ function selector(state) {
         target: state.get('target').toJS(),
         users: state.get('users').toJS(),
         groups: state.get('groups').toJS(),
+        warning: state.get('warning'),
+        modal: state.get('modal'),
         sets: state.get('sets').toJS()
     };
 }

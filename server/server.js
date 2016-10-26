@@ -76,9 +76,11 @@ if (app.get('env') === 'development') {
 /**
 * 服务器启动
 **/
+// 用户socket引用
+var sockets = {};
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-require('./socketEvents')(io, onlineUsers);
+require('./socketEvents')(io, sockets, onlineUsers);
 server.listen(app.get('port'), function() {
     console.log('Server runing at port:' + app.get('port'));
 });

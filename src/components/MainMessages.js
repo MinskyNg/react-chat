@@ -7,6 +7,10 @@ import React from 'react';
 
 
 export default class MainMessages extends React.PureComponent {
+    componentDidUpdate() {
+        this._messages.scrollTop = this._messages.scrollHeight;
+    }
+
     render() {
         const { user, msg } = this.props;
         const { username, avatar } = user;
@@ -30,8 +34,8 @@ export default class MainMessages extends React.PureComponent {
                             />
                         </div>
                         <div className="message-content">
-                            <span>{`${username} ${msgItem.time}`}</span>
-                            <div>{msgItem.text}</div>
+                            <div>{username}<span className="message-time">{msgItem.time}</span></div>
+                            <div className="message-text">{msgItem.text}</div>
                         </div>
                     </div>
                 );
@@ -45,15 +49,18 @@ export default class MainMessages extends React.PureComponent {
                         />
                     </div>
                     <div className="message-content message-other">
-                        <span>{`${msgItem.sender} ${msgItem.time}`}</span>
-                        <div>{msgItem.text}</div>
+                        <div>{msgItem.sender}<span className="message-time">{msgItem.time}</span></div>
+                        <div className="message-text">{msgItem.text}</div>
                     </div>
                 </div>
             );
         });
 
         return (
-            <div className="main-messages">
+            <div
+              className="main-messages"
+              ref={ div => this._messages = div }
+            >
                 {msgItems}
             </div>
         );

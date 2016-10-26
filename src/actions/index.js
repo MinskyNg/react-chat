@@ -58,10 +58,10 @@ export function signin(newUser, keep) {
         })
         .then(response => response.json())
         .then(data => {
-            if (data.sucess) {
+            if (data.success) {
                 const user = data.user;
                 if (keep) {
-                    localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.setItem('user', JSON.stringify(newUser));
                 }
                 dispatch(changeWarning(''));
                 dispatch(changeUser(user));
@@ -69,6 +69,7 @@ export function signin(newUser, keep) {
             } else {
                 dispatch(changeUser(null));
                 dispatch(changeWarning(data.msg));
+                browserHistory.push('/sign');
             }
         })
         .catch(e => console.log('Oops, signin error', e));
@@ -88,10 +89,10 @@ export function signup(newUser, keep) {
         })
         .then(response => response.json())
         .then(data => {
-            if (data.sucess) {
+            if (data.success) {
                 const user = data.user;
                 if (keep) {
-                    localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.setItem('user', JSON.stringify(newUser));
                 }
                 dispatch(changeWarning(''));
                 dispatch(changeUser(user));
@@ -128,9 +129,11 @@ export function updateUser(newUser) {
         })
         .then(response => response.json())
         .then(data => {
-            if (data.sucess) {
-                dispatch(changeUser(data.user));
+            if (data.success) {
+                dispatch(changeUser(newUser));
                 dispatch(changeModal(0));
+            } else {
+                dispatch(changeWarning('资料修改失败'));
             }
         })
         .catch(e => console.log('Oops, updateUser error', e));
@@ -149,10 +152,20 @@ export function fetchUsers() {
 
 // 获取群组列表
 export function fetchGroups() {
-    return dispatch => {
+    return (dispatch, getState) => {
         return fetch('/groups')
         .then(response => response.json())
-        .then(data => dispatch(initGroups(data)))
+        .then(data => {
+            const user = getState().get('user').toJS();
+            dispatch(initGroups(data));
+            // 发布用户上线消息
+            socket.emit('online', {
+                username: user.username,
+                avatar: user.avatar,
+                signature: user.signature,
+                msg: []
+            });
+        })
         .catch(e => console.log('Oops, fetchGroups error', e));
     };
 }
@@ -197,7 +210,7 @@ export function joinGroup(name) {
             });
         }
         socket.emit('join group', { name });
-        changeTarget({ private: false, name });
+        dispatch(changeTarget({ private: false, name }));
     };
 }
 
@@ -210,7 +223,7 @@ export function privateChat(name) {
                 name: target.get('name')
             });
         }
-        changeTarget({ private: true, name });
+        dispatch(changeTarget({ private: true, name }));
     };
 }
 
@@ -220,21 +233,21 @@ export function sendMsg(msg) {
         const sender = getState().get('user').toJS();
         const target = getState().get('target').toJS();
         if (target.private) {
-            addGroupMsg({
+            dispatch(addSelfMsg({
                 target: target.name,
                 sender: sender.username,
                 type: msg.type,
                 text: msg.text,
                 time: msg.time
-            });
+            }));
         } else {
-            addSelfMsg({
+            dispatch(addGroupMsg({
                 target: target.name,
                 sender: sender.username,
                 type: msg.type,
                 text: msg.text,
                 time: msg.time
-            });
+            }));
         }
         socket.emit('new message', {
             private: target.private,

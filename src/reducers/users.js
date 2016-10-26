@@ -10,7 +10,7 @@ export default function users(state = List(), action) {
         case INIT_USERS:
             return fromJS(action.users);
         case ADD_USER:
-            return state.push(Map(action.user));
+            return state.push(fromJS(action.user));
         case REMOVE_USER:
             return state.delete(state.findIndex(y => y.get('username') === action.username));
         case ADD_USER_MSG:

@@ -32,7 +32,7 @@ class Sign extends React.PureComponent {
                 username,
                 password,
                 date: `${date.getFullYear()}-${date.getMonth() + 1}-
-                  ${date.getDate()} ${date.getHours()}:${date.getMinutes()}}`
+                  ${date.getDate()} ${date.getHours()}:${date.getMinutes()}`
             };
             this.props.dispatch(signup(newUser, this._keepSigned.checked));
         }

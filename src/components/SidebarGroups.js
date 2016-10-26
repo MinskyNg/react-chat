@@ -8,7 +8,7 @@ import React from 'react';
 
 export default class SidebarGroups extends React.PureComponent {
     render() {
-        const { groups, joinGroup } = this.props.joinGroup();
+        const { groups, joinGroup } = this.props;
 
         // 生成群组列表
         let groupItems = groups.map(group => (

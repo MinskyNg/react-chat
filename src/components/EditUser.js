@@ -9,7 +9,8 @@ import React from 'react';
 export default class EditUser extends React.PureComponent {
     // 处理用户资料变更
     handleClick() {
-        const avatar = this._avatar.src.replace(/(^\s*)|(\s*$)/g, '');
+        const reg = this._avatar.src.match(/^http:\/\/7xnpxz.com1.z0.glb.clouddn.com\/(\S+).png$/);
+        const avatar = (reg && reg[1]);
         const signature = this._signature.value.replace(/(^\s*)|(\s*$)/g, '');
         this.props.updateUser({
             username: this.props.user.username,
@@ -23,6 +24,7 @@ export default class EditUser extends React.PureComponent {
         return (
             <div className="edit-user">
                 <h2>个人资料</h2>
+                <p className="warning">{this.props.warning}</p>
                 <div>
                     <img
                       ref={ img => this._avatar = img }
@@ -43,7 +45,11 @@ export default class EditUser extends React.PureComponent {
                   defaultValue={user.signature}
                 />
                 <button onClick={() => this.handleClick()}>确认</button>
-                <button onClick={() => this.props.closeModal()}>取消</button>
+                <button onClick={() => {
+                    this.props.closeModal();
+                    this.props.clearWarning();
+                }}
+                >取消</button>
             </div>
         );
     }
