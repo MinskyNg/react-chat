@@ -1,4 +1,4 @@
-import { CHANGE_USER, CHANGE_TARGET, INIT_USERS, ADD_USER, REMOVE_USER,
+import { CHANGE_USER, CHANGE_TARGET, INIT_USERS, ADD_USER, REMOVE_USER, UPDATE_USER,
     INIT_GROUPS, ADD_GROUP, ADD_GROUP_MSG, ADD_USER_MSG, ADD_SELF_MSG, CHANGE_WARNING,
     CHANGE_MODAL, TOGGLE_RECEIVE, TOGGLE_SOUND, TOGGLE_NOTICE, TOGGLE_SCREEN }
     from '../constants/actionTypes';
@@ -28,6 +28,7 @@ export const changeTarget = makeActionCreator(CHANGE_TARGET, 'target');  // 改�
 export const initUsers = makeActionCreator(INIT_USERS, 'users');  // 初始化用户列表
 export const addUser = makeActionCreator(ADD_USER, 'user');  // 添加用户
 export const removeUser = makeActionCreator(REMOVE_USER, 'username');  // 删除用户
+export const updateUser = makeActionCreator(UPDATE_USER, 'user');  // 修改用户资料
 export const initGroups = makeActionCreator(INIT_GROUPS, 'groups');  // 初始化群组列表
 export const addGroup = makeActionCreator(ADD_GROUP, 'group');  // 添加群组
 export const addGroupMsg = makeActionCreator(ADD_GROUP_MSG, 'msg');  // 添加群组消息
@@ -117,7 +118,7 @@ export function signout() {
 }
 
 // 修改用户资料
-export function updateUser(newUser) {
+export function updateProfile(newUser) {
     return dispatch => {
         return fetch('/user', {
             method: 'put',
@@ -132,11 +133,12 @@ export function updateUser(newUser) {
             if (data.success) {
                 dispatch(changeUser(newUser));
                 dispatch(changeModal(0));
+                socket.emit('update user', newUser);
             } else {
                 dispatch(changeWarning('资料修改失败'));
             }
         })
-        .catch(e => console.log('Oops, updateUser error', e));
+        .catch(e => console.log('Oops, updateProfile error', e));
     };
 }
 

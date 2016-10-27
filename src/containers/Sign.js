@@ -28,11 +28,14 @@ class Sign extends React.PureComponent {
             this.props.dispatch(signin({ username, password }, this._keepSigned.checked));
         } else {
             const date = new Date();
+            const hour = date.getHours();
+            const min = date.getMinutes();
             const newUser = {
                 username,
                 password,
                 date: `${date.getFullYear()}-${date.getMonth() + 1}-
-                  ${date.getDate()} ${date.getHours()}:${date.getMinutes()}`
+                  ${date.getDate()} ${hour < 10 ? (`0${hour}`) : hour}:
+                  ${min < 10 ? (`0${min}`) : min}`
             };
             this.props.dispatch(signup(newUser, this._keepSigned.checked));
         }
@@ -73,7 +76,7 @@ class Sign extends React.PureComponent {
                     <div className="password">
                         <i></i>
                         <input
-                          type="text" placeholder="password" maxLength="30"
+                          type="password" placeholder="password" maxLength="30"
                           ref={ input => this._password = input }
                         />
                     </div>

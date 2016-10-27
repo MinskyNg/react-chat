@@ -1,3 +1,6 @@
+// 全局样式
+
+
 * {
     box-sizing: border-box;
 }
@@ -34,4 +37,21 @@ a {
 h4 {
     font-size: 1.6rem;
     font-weight: 500;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    height: 90%;
+    background-color: #F6F6F6;
+    box-shadow: 8px 8px 8px -3px #E5E5E5;
 }

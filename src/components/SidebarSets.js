@@ -14,37 +14,41 @@ export default class SidebarSets extends React.PureComponent {
                 <li className="checkbox">
                     <h4>接收私聊</h4>
                     <div>
-                        <input type="checkbox" id="toggleReceive" checked={sets.receive} />
-                        <label htmlFor="toggleReceive"
-                          onClick={() => this.props.toggleReceive()}
-                        ></label>
+                        <input type="checkbox" id="toggleReceive"
+                          checked={sets.receive}
+                          onChange={() => this.props.toggleReceive()}
+                        />
+                        <label htmlFor="toggleReceive"></label>
                     </div>
                 </li>
                 <li className="checkbox">
                     <h4>声音提醒</h4>
                     <div>
-                        <input type="checkbox" id="toggleSound" checked={sets.sound} />
-                        <label htmlFor="toggleSound"
-                          onClick={() => this.props.toggleSound()}
-                        ></label>
+                        <input type="checkbox" id="toggleSound"
+                          checked={sets.sound}
+                          onChange={() => this.props.toggleSound()}
+                        />
+                        <label htmlFor="toggleSound"></label>
                     </div>
                 </li>
                 <li className="checkbox">
                     <h4>桌面提醒</h4>
                     <div>
-                        <input type="checkbox" id="toggleNotice" checked={sets.notice} />
-                        <label htmlFor="toggleNotice"
-                          onClick={() => this.props.toggleNotice()}
-                        ></label>
+                        <input type="checkbox" id="toggleNotice"
+                          checked={sets.notice}
+                          onChange={() => this.props.toggleNotice()}
+                        />
+                        <label htmlFor="toggleNotice"></label>
                     </div>
                 </li>
                 <li className="checkbox">
                     <h4>切换全屏</h4>
                     <div>
-                        <input type="checkbox" id="toggleScreen" checked={sets.screen} />
-                        <label htmlFor="toggleScreen"
-                          onClick={() => this.props.toggleScreen()}
-                        ></label>
+                        <input type="checkbox" id="toggleScreen"
+                          checked={sets.screen}
+                          onChange={() => this.props.toggleScreen()}
+                        />
+                        <label htmlFor="toggleScreen"></label>
                     </div>
                 </li>
             </ul>

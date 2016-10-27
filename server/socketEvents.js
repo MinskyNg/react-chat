@@ -14,7 +14,6 @@ exports = module.exports = function(io, sockets, onlineUsers) {
             sockets[data.username] = socket;
             socket.join('Group');
             io.emit('online', data);
-            console.log('online');
         });
 
 
@@ -23,7 +22,6 @@ exports = module.exports = function(io, sockets, onlineUsers) {
             var name = data.name;
             socket.join(name);
             socket.broadcast.to(name).emit('join group', { username: socket.name });
-            console.log('join group');
         });
 
 
@@ -32,14 +30,18 @@ exports = module.exports = function(io, sockets, onlineUsers) {
             var name = data.name;
             socket.broadcast.to(name).emit('leave group', { username: socket.name });
             socket.leave(name);
-            console.log('leave group');
+        });
+
+
+        // 修改资料
+        socket.on('update user', function(data){
+            socket.broadcast.emit('update user', data);
         });
 
 
         // 创建群组
         socket.on('new group', function(data){
             socket.broadcast.emit('new group', data);
-            console.log('new group');
         });
 
 
@@ -52,7 +54,6 @@ exports = module.exports = function(io, sockets, onlineUsers) {
                     sockets[data.target].emit('new message', data);
                 }
             }
-            console.log('new msg');
         });
 
 
@@ -67,7 +68,6 @@ exports = module.exports = function(io, sockets, onlineUsers) {
                     });
                 }
             }
-            console.log('offline');
         });
 
 
@@ -83,6 +83,5 @@ exports = module.exports = function(io, sockets, onlineUsers) {
                 }
             }
         });
-        console.log('disconnect');
     });
 };

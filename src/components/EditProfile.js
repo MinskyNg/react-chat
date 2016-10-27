@@ -6,13 +6,13 @@
 import React from 'react';
 
 
-export default class EditUser extends React.PureComponent {
+export default class EditProfile extends React.PureComponent {
     // 处理用户资料变更
     handleClick() {
         const reg = this._avatar.src.match(/^http:\/\/7xnpxz.com1.z0.glb.clouddn.com\/(\S+).png$/);
         const avatar = (reg && reg[1]);
         const signature = this._signature.value.replace(/(^\s*)|(\s*$)/g, '');
-        this.props.updateUser({
+        this.props.updateProfile({
             username: this.props.user.username,
             avatar,
             signature

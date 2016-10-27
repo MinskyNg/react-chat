@@ -3,6 +3,7 @@ export const CHANGE_TARGET = 'CHANGE_TARGET';
 export const INIT_USERS = 'INIT_USERS';
 export const ADD_USER = 'ADD_USER';
 export const REMOVE_USER = 'REMOVE_USER';
+export const UPDATE_USER = 'UPDATE_USER';
 export const INIT_GROUPS = 'INIT_GROUPS';
 export const ADD_GROUP = 'ADD_GROUP';
 export const ADD_GROUP_MSG = 'ADD_GROUP_MSG';

@@ -1,3 +1,6 @@
+// 模态框及资料编辑 创建群组区
+
+
 .modal {
     position: fixed;
     top: 0;
@@ -7,6 +10,7 @@
     background-color: rgba(0, 0, 0, .3);
     z-index: 9;
 }
+
 
 .edit-user {
     position: fixed;
@@ -111,6 +115,7 @@
         }
     }
 }
+
 
 .edit-group {
     position: fixed;

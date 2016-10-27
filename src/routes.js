@@ -10,6 +10,7 @@ import Sign from './containers/Sign';
 const requireUser = (store) => {
     return (nextState, replace) => {
         if (!store.getState().get('user')) {
+            // replace('/loading');
             replace('/sign');
             const user = JSON.parse(localStorage.getItem('user'));
             if (user) {

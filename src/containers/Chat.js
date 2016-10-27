@@ -8,18 +8,44 @@ import { connect } from 'react-redux';
 import Sidebar from '../components/Sidebar';
 import Main from '../components/Main';
 import Model from '../components/Model';
-import { socket, fetchUsers, fetchGroups, signout, updateUser, createGroup,
-    joinGroup, privateChat, sendMsg, initUsers, addUser, removeUser, addGroup,
-    addGroupMsg, addUserMsg, changeWarning, changeModal,
+import { socket, fetchUsers, fetchGroups, signout, updateProfile, changeTarget,
+    createGroup, joinGroup, privateChat, sendMsg, initUsers, addUser, removeUser,
+    updateUser, addGroup, addGroupMsg, addUserMsg, changeWarning, changeModal,
     toggleReceive, toggleSound, toggleNotice, toggleScreen } from '../actions';
 
 
 class Chat extends React.PureComponent {
     componentDidMount() {
-        this.target = this.props.target;
         const { dispatch, user } = this.props;
-        const addGroupMsgA = msg => dispatch(addGroupMsg(msg));
-        const addUserMsgA = msg => dispatch(addUserMsg(msg));
+        this.target = this.props.target;
+        this.receive = this.props.sets.receive;
+        this.sound = this.props.sets.sound;
+        this.notice = this.props.sets.notice;
+        this._sound.volume = 0.5;
+
+        const addUserMsgA = msg => {
+            if (this.receive) {
+                dispatch(addUserMsg(msg));
+                if (this.sound) {
+                    this._sound.play();
+                }
+                if (this.notice) {
+                    new Notification('React Chat', { lang: 'utf-8',
+                        body: `${msg.target}：\n${msg.text}` });
+                }
+            }
+        };
+        const addGroupMsgA = msg => {
+            dispatch(addGroupMsg(msg));
+            if (this.sound) {
+                this._sound.play();
+            }
+            if (this.notice) {
+                new Notification('React Chat', { lang: 'utf-8',
+                    body: `${msg.target}：\n${msg.text}` });
+            }
+        };
+
 
         // 获取用户列表、群组列表
         dispatch(fetchUsers());
@@ -94,6 +120,11 @@ class Chat extends React.PureComponent {
             }
         });
 
+        // 修改资料
+        socket.on('update user', data => {
+            dispatch(updateUser(data));
+        });
+
         // 新建群组
         socket.on('new group', data => {
             dispatch(addGroup(data));
@@ -110,6 +141,10 @@ class Chat extends React.PureComponent {
 
         // 用户下线
         socket.on('offline', data => {
+            if (data.username === this.target.name) {
+                dispatch(changeTarget({ private: false, name: 'Group' }));
+            }
+
             if (this.target.private) {
                 addUserMsgA({
                     target: this.target.name,
@@ -123,6 +158,7 @@ class Chat extends React.PureComponent {
                     text: `用户 ${data.username} 下线了`
                 });
             }
+
             dispatch(removeUser(data.username));
         });
 
@@ -167,11 +203,52 @@ class Chat extends React.PureComponent {
                 msg: []
             });
         });
+        Notification.requestPermission();
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.target !== nextProps.target) {
             this.target = nextProps.target;
+        }
+        if (this.props.sets.receive !== nextProps.sets.receive) {
+            this.receive = nextProps.sets.receive;
+        }
+        if (this.props.sets.sound !== nextProps.sets.sound) {
+            this.sound = nextProps.sets.sound;
+        }
+        if (this.props.sets.notice !== nextProps.sets.notice) {
+            this.notice = nextProps.sets.notice;
+        }
+        if (this.props.sets.screen !== nextProps.sets.screen) {
+            if (nextProps.sets.screen === true) {
+                this.requestFullScreen();
+            } else {
+                this.exitFullscreen();
+            }
+        }
+    }
+
+    // 进入全屏
+    requestFullScreen() {
+        const de = document.documentElement;
+        if (de.requestFullscreen) {
+            de.requestFullscreen();
+        } else if (de.mozRequestFullScreen) {
+            de.mozRequestFullScreen();
+        } else if (de.webkitRequestFullScreen) {
+            de.webkitRequestFullScreen();
+        }
+    }
+
+    // 退出全屏
+    exitFullscreen() {
+        const de = document;
+        if (de.exitFullscreen) {
+            de.exitFullscreen();
+        } else if (de.mozCancelFullScreen) {
+            de.mozCancelFullScreen();
+        } else if (de.webkitCancelFullScreen) {
+            de.webkitCancelFullScreen();
         }
     }
 
@@ -236,11 +313,15 @@ class Chat extends React.PureComponent {
                   groups={groups}
                   warning={warning}
                   modal={modal}
-                  updateUser={newUser => dispatch(updateUser(newUser))}
+                  updateProfile={newUser => dispatch(updateProfile(newUser))}
                   createGroup={newGroup => dispatch(createGroup(newGroup))}
                   clearWarning={() => dispatch(changeWarning(''))}
                   closeModal={() => dispatch(changeModal(0))}
                 />
+                <audio ref={audio => this._sound = audio} style={{ display: 'none' }}>
+                    <source src="http://7xnpxz.com1.z0.glb.clouddn.com/notice.mp3" type="audio/mp3" />
+                    <source src="http://7xnpxz.com1.z0.glb.clouddn.com/notice.ogg" type="audio/ogg" />
+                </audio>
             </div>
         );
     }

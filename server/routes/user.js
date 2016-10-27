@@ -51,13 +51,21 @@ module.exports = function(router, onlineUsers) {
 
     // 修改用户资料
     router.put('/user', function(req, res) {
-        User.update({ username: req.body.username },
-            ({ $set: { signature: req.body.signature, avatar: req.body.avatar } }),
+        var username = req.body.username;
+        var signature = req.body.signature;
+        var avatar = req.body.avatar;
+        User.update({ username }, ({ $set: { signature, avatar } }),
             function(err) {
-                if (err) {
-                    res.json({ success: false });
-                } else {
+                if (!err) {
+                    for (var i = 0, len = onlineUsers.length; i < len; i++) {
+                        if (onlineUsers[i] && onlineUsers[i].username === username) {
+                            onlineUsers[i] = { username, signature, avatar };
+                            break;
+                        }
+                    }
                     res.json({ success: true });
+                } else {
+                    res.json({ success: false });
                 }
             });
     });
