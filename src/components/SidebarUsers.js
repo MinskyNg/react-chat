@@ -15,7 +15,7 @@ export default class SidebarUsers extends React.PureComponent {
             <li key={user.username} onClick={() => privateChat(user.username)}>
                 <div className="avatar">
                     <img
-                      src={`http://7xnpxz.com1.z0.glb.clouddn.com/${user.avatar}.png`}
+                      src={user.avatar}
                       alt="头像"
                     />
                 </div>

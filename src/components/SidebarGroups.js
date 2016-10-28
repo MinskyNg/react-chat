@@ -15,7 +15,7 @@ export default class SidebarGroups extends React.PureComponent {
             <li key={group.name} onClick={() => joinGroup(group.name)}>
                 <div className="avatar">
                     <img
-                      src={`http://7xnpxz.com1.z0.glb.clouddn.com/${group.avatar}.png`}
+                      src={group.avatar}
                       alt="头像"
                     />
                 </div>

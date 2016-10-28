@@ -26,24 +26,24 @@ class Chat extends React.PureComponent {
         const addUserMsgA = msg => {
             if (this.receive) {
                 dispatch(addUserMsg(msg));
-                if (this.sound) {
-                    this._sound.play();
-                }
-                if (this.notice) {
-                    new Notification('React Chat', { lang: 'utf-8',
-                        body: `${msg.target}：\n${msg.text}` });
-                }
+                // if (this.sound) {
+                //     this._sound.play();
+                // }
+                // if (this.notice) {
+                //     new Notification('React Chat', { lang: 'utf-8',
+                //         body: `${msg.target}：\n${msg.text}` });
+                // }
             }
         };
         const addGroupMsgA = msg => {
             dispatch(addGroupMsg(msg));
-            if (this.sound) {
-                this._sound.play();
-            }
-            if (this.notice) {
-                new Notification('React Chat', { lang: 'utf-8',
-                    body: `${msg.target}：\n${msg.text}` });
-            }
+            // if (this.sound) {
+            //     this._sound.play();
+            // }
+            // if (this.notice) {
+            //     new Notification('React Chat', { lang: 'utf-8',
+            //         body: `${msg.target}：\n${msg.text}` });
+            // }
         };
 
 
@@ -54,21 +54,7 @@ class Chat extends React.PureComponent {
 
         // 用户上线
         socket.on('online', data => {
-            if (data.username === this.props.user.username) {
-                if (this.target.private) {
-                    addUserMsgA({
-                        target: this.target.name,
-                        type: 'system',
-                        text: '欢迎进入聊天室'
-                    });
-                } else {
-                    addGroupMsgA({
-                        target: this.target.name,
-                        type: 'system',
-                        text: '欢迎进入聊天室'
-                    });
-                }
-            } else {
+            if (data.username !== this.props.user.username) {
                 if (this.target.private) {
                     addUserMsgA({
                         target: this.target.name,
@@ -83,6 +69,20 @@ class Chat extends React.PureComponent {
                     });
                 }
                 dispatch(addUser(data));
+            } else {
+                if (this.target.private) {
+                    addUserMsgA({
+                        target: this.target.name,
+                        type: 'system',
+                        text: '欢迎进入聊天室'
+                    });
+                } else {
+                    addGroupMsgA({
+                        target: this.target.name,
+                        type: 'system',
+                        text: '欢迎进入聊天室'
+                    });
+                }
             }
         });
 
@@ -145,6 +145,8 @@ class Chat extends React.PureComponent {
                 dispatch(changeTarget({ private: false, name: 'Group' }));
             }
 
+            dispatch(removeUser(data.username));
+
             if (this.target.private) {
                 addUserMsgA({
                     target: this.target.name,
@@ -158,8 +160,6 @@ class Chat extends React.PureComponent {
                     text: `用户 ${data.username} 下线了`
                 });
             }
-
-            dispatch(removeUser(data.username));
         });
 
         // 断开连接
@@ -205,6 +205,7 @@ class Chat extends React.PureComponent {
         });
         Notification.requestPermission();
     }
+
 
     componentWillReceiveProps(nextProps) {
         if (this.props.target !== nextProps.target) {
@@ -315,8 +316,11 @@ class Chat extends React.PureComponent {
                   modal={modal}
                   updateProfile={newUser => dispatch(updateProfile(newUser))}
                   createGroup={newGroup => dispatch(createGroup(newGroup))}
-                  clearWarning={() => dispatch(changeWarning(''))}
-                  closeModal={() => dispatch(changeModal(0))}
+                  changeWarning={newWarning => dispatch(changeWarning(newWarning))}
+                  closeModal={() => {
+                      dispatch(changeWarning(''));
+                      dispatch(changeModal(0));
+                  }}
                 />
                 <audio ref={audio => this._sound = audio} style={{ display: 'none' }}>
                     <source src="http://7xnpxz.com1.z0.glb.clouddn.com/notice.mp3" type="audio/mp3" />

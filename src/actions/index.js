@@ -251,14 +251,38 @@ export function sendMsg(msg) {
                 time: msg.time
             }));
         }
-        socket.emit('new message', {
-            private: target.private,
-            target: target.name,
-            sender: sender.username,
-            avatar: sender.avatar,
-            type: msg.type,
-            text: msg.text,
-            time: msg.time
-        });
+        if (target.name !== '图灵机器人') {
+            socket.emit('new message', {
+                private: target.private,
+                target: target.name,
+                sender: sender.username,
+                avatar: sender.avatar,
+                type: msg.type,
+                text: msg.text,
+                time: msg.time
+            });
+        } else {
+            fetch(`http://www.tuling123.com/openapi/api?key=e1926d22a51e416f981b271a06d92f1b&info=${msg.text}&userid=${sender.username}`, {
+                method: 'get',
+                headers: {
+                    Accept: '*/*'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                let time = new Date();
+                const hour = time.getHours();
+                const min = time.getMinutes();
+                time = `${hour < 10 ? (`0${hour}`) : hour}:${min < 10 ? (`0${min}`) : min}`;
+                dispatch(addUserMsg({
+                    sender: '图灵机器人',
+                    avatar: 'http://7xnpxz.com1.z0.glb.clouddn.com/robot.png',
+                    type: 'plain',
+                    text: data.text,
+                    time
+                }));
+            })
+            .catch(e => console.log('Oops, turingrobot error', e));
+        }
     };
 }

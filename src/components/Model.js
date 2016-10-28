@@ -19,14 +19,14 @@ export default class Model extends React.PureComponent {
                       user={this.props.user}
                       warning={this.props.warning}
                       updateProfile={newUser => this.props.updateProfile(newUser)}
-                      clearWarning={() => this.props.clearWarning()}
+                      changeWarning={newWarning => this.props.changeWarning(newWarning)}
                       closeModal={() => this.props.closeModal()}
                     />
                     :
                     <EditGroup
                       warning={this.props.warning}
                       createGroup={newGroup => this.props.createGroup(newGroup)}
-                      clearWarning={() => this.props.clearWarning()}
+                      changeWarning={newWarning => this.props.changeWarning(newWarning)}
                       closeModal={() => this.props.closeModal()}
                     />
                 }

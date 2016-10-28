@@ -15,7 +15,7 @@ const initialState = fromJS({
     user: null,
     target: { private: false, name: 'Group' },
     users: [],
-    groups: [{ name: 'Group', signature: '聊天室默认群组', avatar: 'groupdefault', msg: [] }],
+    groups: [{ name: 'Group', signature: '聊天室默认群组', avatar: 'http://7xnpxz.com1.z0.glb.clouddn.com/groupdefault.png', msg: [] }],
     warning: '',
     modal: 0,
     sets: {

@@ -44,7 +44,12 @@ app.get('/', function(req, res) {
 * 加载路由
 **/
 // 在线用户列表
-var onlineUsers = [];
+var onlineUsers = [{
+    username: '图灵机器人',
+    signature: '图灵机器人聊天API',
+    avatar: 'http://7xnpxz.com1.z0.glb.clouddn.com/robot.png',
+    msg: []
+}];
 var usersRouter = express.Router();
 var groupRouter = express.Router();
 require('./routes/group')(groupRouter);

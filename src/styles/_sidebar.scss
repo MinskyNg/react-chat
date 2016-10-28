@@ -1,4 +1,4 @@
-// 聊天室边框
+// 聊天室边栏
 
 
 .sidebar {
@@ -19,6 +19,7 @@
     padding: 19px 10px 0 15px;
 
     .avatar {
+        position: relative;
         display: block;
         width: 60px;
         height: 60px;
@@ -26,10 +27,14 @@
         margin-top: 4px;
         margin-right: 15px;
         border-radius: 50%;
+        overflow: hidden;
         cursor: pointer;
         img {
-            max-width: 100%;
-            height: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
         }
     }
@@ -127,8 +132,12 @@
 
     li {
         display: flex;
-        margin: 2rem 1rem;
+        margin: 0;
+        padding: 1rem;
         cursor: pointer;
+        &:hover {
+            background-color: #EEE;
+        }
     }
 
     .avatar {
@@ -137,9 +146,13 @@
         height: 50px;
         margin-right: 10px;
         border-radius: 50%;
+        overflow: hidden;
         img {
-            max-width: 100%;
-            height: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
         }
     }

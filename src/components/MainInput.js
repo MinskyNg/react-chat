@@ -7,10 +7,6 @@ import React from 'react';
 
 
 export default class MainInput extends React.PureComponent {
-    // sendImage() {
-
-    // }
-
     // 发送文本
     sendText() {
         const text = this._text.value.replace(/(^\s*)|(\s*$)/g, '');
@@ -28,6 +24,37 @@ export default class MainInput extends React.PureComponent {
         }
     }
 
+    // 处理图片上传
+    handleUpload() {
+        const fileInput = this._fileInput;
+        if (fileInput.files && fileInput.files[0]) {
+            const body = new FormData();
+            body.append('smfile', fileInput.files[0]);
+            fetch(' https://sm.ms/api/upload', {
+                method: 'post',
+                headers: {
+                    Accept: '*/*',
+                },
+                body
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.data) {
+                let time = new Date();
+                const hour = time.getHours();
+                const min = time.getMinutes();
+                time = `${hour < 10 ? (`0${hour}`) : hour}:${min < 10 ? (`0${min}`) : min}`;
+                this.props.sendMsg({
+                    type: 'image',
+                    text: data.data.url,
+                    time,
+                });
+                }
+            })
+            .catch(e => console.log('Oops, upload error', e));
+        }
+    }
+
     // 处理回车
     handleEnter(event) {
         if (event.keyCode === 13) {
@@ -39,11 +66,16 @@ export default class MainInput extends React.PureComponent {
     render() {
         return (
             <div className="main-input">
-                <button className="button-face"></button>
-                <button className="button-image"></button>
+                <a className="button-image">
+                    <input
+                      type="file" accept="image/*"
+                      ref={ input => this._fileInput = input }
+                      onChange={() => this.handleUpload()}
+                    />
+                </a>
                 <input
-                  ref={input => this._text = input}
                   type="text" placeholder="Type a message here"
+                  ref={input => this._text = input}
                   onKeyDown={(e) => this.handleEnter(e)}
                 />
                 <button

@@ -11,7 +11,7 @@ var UserSchema = mongoose.Schema({
     username: { type: String, unique: true },
     password: String,
     signature: { type: String, default: '' },
-    avatar: { type: String, default: 'userdefault' },
+    avatar: { type: String, default: 'http://7xnpxz.com1.z0.glb.clouddn.com/userdefault.png' },
     date: String
 });
 

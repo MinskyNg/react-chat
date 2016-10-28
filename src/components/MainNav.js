@@ -13,7 +13,7 @@ export default class MainNav extends React.PureComponent {
             <nav className="main-nav">
                 <div>
                     <img
-                      src={`http://7xnpxz.com1.z0.glb.clouddn.com/${targetProfile.avatar}.png`}
+                      src={targetProfile.avatar}
                       alt="头像"
                     />
                 </div>
