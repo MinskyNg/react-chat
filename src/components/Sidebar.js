@@ -17,9 +17,17 @@ export default class Sidebar extends React.PureComponent {
 
 
     render() {
+        const menu = this.props.menu;
+        let resStyle = {};
+        if (document.body.clientWidth <= 886) {
+            resStyle = { flex: this.props.menu ? '1' : 'none' };
+        }
+
         return (
-            <aside className="sidebar">
+            <aside className="sidebar" style={resStyle}>
                 <SidebarNav
+                  menu={menu}
+                  toggleMenu={bool => this.props.toggleMenu(bool)}
                   user={this.props.user}
                   signout={() => this.props.signout()}
                   showEditUser={() => this.props.changeModal(1)}
@@ -29,6 +37,7 @@ export default class Sidebar extends React.PureComponent {
                   this.state.search
                   ?
                   <SidebarSearch
+                    menu={menu}
                     users={this.props.users}
                     groups={this.props.groups}
                     keyword={this.state.keyword}
@@ -38,6 +47,7 @@ export default class Sidebar extends React.PureComponent {
                   />
                   :
                   <SidebarMain
+                    menu={menu}
                     users={this.props.users}
                     groups={this.props.groups}
                     sets={this.props.sets}

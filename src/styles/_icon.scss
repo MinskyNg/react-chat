@@ -11,11 +11,11 @@
 }
 
 .icon-username {
-    @include icon(-42px -40px, 16px, 16px);
+    @include icon(-70px 0, 16px, 16px);
 }
 
 .icon-password {
-    @include icon(-26px -40px, 16px, 16px);
+    @include icon(-52px -40px, 16px, 16px);
 }
 
 .icon-search {
@@ -27,5 +27,12 @@
 }
 
 .icon-signout {
-    @include icon(0px -40px, 26px, 26px);
+    @include icon(-26px -40px, 26px, 26px);
+    cursor: pointer;
+}
+
+.icon-menu {
+    @include icon(0 -40px, 26px, 26px);
+    display: none;
+    cursor: pointer;
 }

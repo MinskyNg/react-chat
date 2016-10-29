@@ -18,7 +18,11 @@ export default class SidebarMain extends React.PureComponent {
 
     render() {
         const content = this.state.content;
-        let activeStyle = { borderBottom: '2px solid #4385F5', color: '#4385F5' };
+        const activeStyle = { borderBottom: '2px solid #4385F5', color: '#4385F5' };
+        let resStyle = {};
+        if (document.body.clientWidth <= 886) {
+            resStyle = { display: this.props.menu ? 'flex' : 'none' };
+        }
 
         // 根据状态展示不同列表
         let SideBarList;
@@ -51,7 +55,7 @@ export default class SidebarMain extends React.PureComponent {
 
 
         return (
-            <div className="sidebar-main">
+            <div className="sidebar-main" style={resStyle}>
                 <div className="sidebar-menu">
                     <button
                       onClick={() => this.setState({ content: 1 })}

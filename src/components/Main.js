@@ -11,8 +11,13 @@ import MainInput from './MainInput';
 
 export default class Main extends React.PureComponent {
     render() {
+        let resStyle = {};
+        if (document.body.clientWidth <= 886) {
+            resStyle = { display: this.props.menu ? 'none' : 'flex' };
+        }
+
         return (
-            <div className="main">
+            <div className="main" style={resStyle}>
                 <MainNav
                   targetProfile={this.props.targetProfile}
                 />

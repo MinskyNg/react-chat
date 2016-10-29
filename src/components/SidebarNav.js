@@ -35,13 +35,19 @@ export default class SidebarNav extends React.PureComponent {
                         />
                     </button>
                     <div className="profile">
+                        <h3>{user.username}</h3>
+                        <p>{user.signature}</p>
+                    </div>
+                    <div className="button-wrapper">
                         <button
-                          className="signout icon-signout"
+                          className="icon-signout"
                           title="退出登录"
                           onClick={() => this.props.signout()}
                         ></button>
-                        <h3>{user.username}</h3>
-                        <p>{user.signature}</p>
+                        <button
+                          className="icon-menu"
+                          onClick={() => this.props.toggleMenu(!this.props.menu)}
+                        ></button>
                     </div>
                 </div>
                 <div className="input-search">

@@ -15,6 +15,11 @@ import { socket, fetchUsers, fetchGroups, signout, updateProfile, changeTarget,
 
 
 class Chat extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = { menu: false };
+    }
+
     componentDidMount() {
         const { dispatch, user } = this.props;
         this.target = this.props.target;
@@ -294,6 +299,8 @@ class Chat extends React.PureComponent {
         return (
             <div className="container">
                 <Sidebar
+                  menu={this.state.menu}
+                  toggleMenu={bool => this.setState({ menu: bool })}
                   user={user}
                   users={users}
                   groups={groups}
@@ -308,6 +315,7 @@ class Chat extends React.PureComponent {
                   toggleScreen={() => dispatch(toggleScreen())}
                 />
                 <Main
+                  menu={this.state.menu}
                   user={user}
                   msg={msg}
                   targetProfile={targetProfile}

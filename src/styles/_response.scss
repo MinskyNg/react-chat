@@ -1,0 +1,41 @@
+// 媒体查询
+
+@media screen and (max-width: 996px) {
+    .container {
+        width: 95%;
+        height: 95%;
+    }
+}
+
+@media screen and (max-width: 886px) {
+    .container {
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+
+    .sidebar {
+        flex: none;
+    }
+
+    .sidebar-nav {
+        height: 120px;
+    }
+
+    .sidebar-profile {
+        height: 80px;
+        padding: 7px 10px 7px 8px;
+    }
+
+    .icon-menu {
+        display: block;
+    }
+
+    .sidebar-main {
+        display: none;
+    }
+
+    .main {
+        // display: none;
+    }
+}

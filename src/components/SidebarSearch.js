@@ -9,6 +9,10 @@ import React from 'react';
 export default class SidebarSearch extends React.PureComponent {
     render() {
         const { users, groups, keyword, privateChat, joinGroup } = this.props;
+        let resStyle = {};
+        if (document.body.clientWidth <= 886) {
+            resStyle = { display: this.props.menu ? 'flex' : 'none' };
+        }
 
         // 生成用户列表
         let userItems = [];
@@ -54,7 +58,7 @@ export default class SidebarSearch extends React.PureComponent {
 
 
         return (
-            <div className="sidebar-main">
+            <div className="sidebar-main" style={resStyle}>
                 <div className="sidebar-content">
                     <button className="create-group" onClick={() => this.props.back()}>
                     返回</button>
