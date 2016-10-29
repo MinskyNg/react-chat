@@ -70,7 +70,7 @@ export function signin(newUser, keep) {
             } else {
                 dispatch(changeUser(null));
                 dispatch(changeWarning(data.msg));
-                browserHistory.push('/sign');
+                browserHistory.replace('/sign');
             }
         })
         .catch(e => console.log('Oops, signin error', e));

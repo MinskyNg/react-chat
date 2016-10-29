@@ -1,5 +1,5 @@
 /**
-* redux store prod
+* 生产环境redux store
 **/
 
 

@@ -18,6 +18,7 @@ export default class EditProfile extends React.PureComponent {
         });
     }
 
+
     // 处理图片上传
     handleUpload() {
         const fileInput = this._fileInput;
@@ -42,6 +43,7 @@ export default class EditProfile extends React.PureComponent {
             .catch(e => console.log('Oops, upload error', e));
         }
     }
+
 
     render() {
         const user = this.props.user;

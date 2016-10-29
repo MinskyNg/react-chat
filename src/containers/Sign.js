@@ -14,6 +14,7 @@ class Sign extends React.PureComponent {
         this.state = { signinPage: true };
     }
 
+
     // 处理提交注册登录
     handleSubmit(event) {
         event.preventDefault();
@@ -41,6 +42,7 @@ class Sign extends React.PureComponent {
         }
     }
 
+
     render() {
         const signinPage = this.state.signinPage;
 
@@ -67,14 +69,14 @@ class Sign extends React.PureComponent {
                 </div>
                 <form action="#" onSubmit={ e => this.handleSubmit(e) }>
                     <div className="username">
-                        <i></i>
+                        <i className="icon-username"></i>
                         <input
                           type="text" placeholder="username" maxLength="8"
                           ref={ input => this._username = input }
                         />
                     </div>
                     <div className="password">
-                        <i></i>
+                        <i className="icon-password"></i>
                         <input
                           type="password" placeholder="password" maxLength="30"
                           ref={ input => this._password = input }

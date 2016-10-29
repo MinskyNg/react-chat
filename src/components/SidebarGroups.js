@@ -24,13 +24,12 @@ export default class SidebarGroups extends React.PureComponent {
                     <p>{group.signature}</p>
                 </div>
             </li>
-            ));
+        ));
 
         return (
             <ul>
                 <button className="create-group" onClick={() => this.props.showEditGroup()}>
-                    创建群组
-                </button>
+                创建群组</button>
                 {groupItems}
             </ul>
         );

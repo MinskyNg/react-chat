@@ -62,21 +62,15 @@
     height: 26px;
     margin-top: -6px;
     margin-right: 5px;
-    background: transparent url(./img/signout.png) no-repeat;
     cursor: pointer;
 }
 
-.sidebar-search {
+.input-search {
     display: flex;
     align-items: center;
     height: 40px;
     padding: 0 12px;
     background-color: #4275E3;
-    i {
-        width: 30px;
-        height: 30px;
-        background: transparent url(./img/search.png) no-repeat;
-    }
     input {
         flex: 1;
         height: 34px;
@@ -244,17 +238,4 @@
         }
     }
 
-}
-
-.icon-pc, .icon-phone {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 16px;
-    height: 16px;
-    background: transparent url(./img/pc.png) no-repeat;
-}
-
-.icon-phone {
-    background: transparent url(./img/phone.png) no-repeat;
 }

@@ -1,0 +1,31 @@
+// 图标背景
+
+
+@mixin icon($position, $width, $height) {
+    display: block;
+    background-color: transparent;
+    background-image: url(./img/sprite.png);
+    background-position: $position;
+    width: $width;
+    height: $height;
+}
+
+.icon-username {
+    @include icon(-42px -40px, 16px, 16px);
+}
+
+.icon-password {
+    @include icon(-26px -40px, 16px, 16px);
+}
+
+.icon-search {
+    @include icon(-40px 0px, 30px, 30px);
+}
+
+.icon-image {
+    @include icon(0px 0px, 40px, 40px);
+}
+
+.icon-signout {
+    @include icon(0px -40px, 26px, 26px);
+}

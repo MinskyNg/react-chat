@@ -26,24 +26,24 @@ class Chat extends React.PureComponent {
         const addUserMsgA = msg => {
             if (this.receive) {
                 dispatch(addUserMsg(msg));
-                // if (this.sound) {
-                //     this._sound.play();
-                // }
-                // if (this.notice) {
-                //     new Notification('React Chat', { lang: 'utf-8',
-                //         body: `${msg.target}：\n${msg.text}` });
-                // }
+                if (this.sound) {
+                    this._sound.play();
+                }
+                if (this.notice) {
+                    new Notification('React Chat', { lang: 'utf-8',
+                        body: `${msg.target}：\n${msg.text}` });
+                }
             }
         };
         const addGroupMsgA = msg => {
             dispatch(addGroupMsg(msg));
-            // if (this.sound) {
-            //     this._sound.play();
-            // }
-            // if (this.notice) {
-            //     new Notification('React Chat', { lang: 'utf-8',
-            //         body: `${msg.target}：\n${msg.text}` });
-            // }
+            if (this.sound) {
+                this._sound.play();
+            }
+            if (this.notice) {
+                new Notification('React Chat', { lang: 'utf-8',
+                    body: `${msg.target}：\n${msg.text}` });
+            }
         };
 
 
@@ -229,6 +229,7 @@ class Chat extends React.PureComponent {
         }
     }
 
+
     // 进入全屏
     requestFullScreen() {
         const de = document.documentElement;
@@ -241,6 +242,7 @@ class Chat extends React.PureComponent {
         }
     }
 
+
     // 退出全屏
     exitFullscreen() {
         const de = document;
@@ -252,6 +254,7 @@ class Chat extends React.PureComponent {
             de.webkitCancelFullScreen();
         }
     }
+
 
     render() {
         const { dispatch, user, target, users, groups, warning, modal, sets } = this.props;
@@ -286,6 +289,7 @@ class Chat extends React.PureComponent {
                 }
             }
         }
+
 
         return (
             <div className="container">

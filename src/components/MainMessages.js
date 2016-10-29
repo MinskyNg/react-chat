@@ -11,10 +11,10 @@ export default class MainMessages extends React.PureComponent {
         this._messages.scrollTop = this._messages.scrollHeight;
     }
 
+
     render() {
         const { user, msg } = this.props;
         const { username, avatar } = user;
-
 
         // 根据消息类型不同 生成消息列表
         const msgItems = msg.map((msgItem, index) => {
@@ -61,6 +61,7 @@ export default class MainMessages extends React.PureComponent {
                 </div>
             );
         });
+
 
         return (
             <div

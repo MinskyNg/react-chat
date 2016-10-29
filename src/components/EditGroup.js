@@ -19,6 +19,7 @@ export default class EditGroup extends React.PureComponent {
         });
     }
 
+
     // 处理图片上传
     handleUpload() {
         const fileInput = this._fileInput;
@@ -43,6 +44,7 @@ export default class EditGroup extends React.PureComponent {
             .catch(e => console.log('Oops, upload error', e));
         }
     }
+
 
     render() {
         return (

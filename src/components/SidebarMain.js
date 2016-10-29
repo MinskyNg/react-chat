@@ -15,9 +15,9 @@ export default class SidebarMain extends React.PureComponent {
         this.state = { content: 1 };
     }
 
+
     render() {
         const content = this.state.content;
-
         let activeStyle = { borderBottom: '2px solid #4385F5', color: '#4385F5' };
 
         // 根据状态展示不同列表
@@ -48,6 +48,8 @@ export default class SidebarMain extends React.PureComponent {
                 />
             );
         }
+
+
         return (
             <div className="sidebar-main">
                 <div className="sidebar-menu">

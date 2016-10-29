@@ -1,5 +1,5 @@
 /**
-* redux store dev
+* 开发环境redux store
 **/
 
 

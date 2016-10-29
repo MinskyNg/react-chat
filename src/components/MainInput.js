@@ -24,6 +24,7 @@ export default class MainInput extends React.PureComponent {
         }
     }
 
+
     // 处理图片上传
     handleUpload() {
         const fileInput = this._fileInput;
@@ -55,6 +56,7 @@ export default class MainInput extends React.PureComponent {
         }
     }
 
+
     // 处理回车
     handleEnter(event) {
         if (event.keyCode === 13) {
@@ -63,10 +65,11 @@ export default class MainInput extends React.PureComponent {
         event.stopPropagation();
     }
 
+
     render() {
         return (
             <div className="main-input">
-                <a className="button-image">
+                <a className="button-image icon-image">
                     <input
                       type="file" accept="image/*"
                       ref={ input => this._fileInput = input }

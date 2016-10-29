@@ -11,7 +11,6 @@ import EditGroup from './EditGroup';
 export default class Model extends React.PureComponent {
     render() {
         const modal = this.props.modal;
-
         return (
             <div className="modal" style={{ display: modal === 0 ? 'none' : 'block' }}>
                 { modal === 1 ?
