@@ -3,7 +3,7 @@ import { CHANGE_USER, CHANGE_TARGET, INIT_USERS, ADD_USER, REMOVE_USER, UPDATE_U
     CHANGE_MODAL, TOGGLE_RECEIVE, TOGGLE_SOUND, TOGGLE_NOTICE, TOGGLE_SCREEN }
     from '../constants/actionTypes';
 import { browserHistory } from 'react-router';
-import fetch from 'isomorphic-fetch';
+import 'isomorphic-fetch';
 import io from 'socket.io-client';
 
 

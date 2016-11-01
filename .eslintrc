@@ -1,6 +1,7 @@
 {
   "env": {
     "mocha": true,
+    "phantomjs": true,
     "node": true
   },
   ecmaFeatures: {
