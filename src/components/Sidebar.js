@@ -50,7 +50,7 @@ export default class Sidebar extends React.PureComponent {
                     menu={menu}
                     users={this.props.users}
                     groups={this.props.groups}
-                    sets={this.props.sets}
+                    settings={this.props.settings}
                     privateChat={name => this.props.privateChat(name)}
                     joinGroup={name => this.props.joinGroup(name)}
                     showEditGroup={() => this.props.changeModal(2)}

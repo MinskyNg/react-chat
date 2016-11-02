@@ -6,7 +6,7 @@
 import React from 'react';
 import SidebarUsers from './SidebarUsers';
 import SidebarGroups from './SidebarGroups';
-import SidebarSets from './SidebarSets';
+import SidebarSettings from './SidebarSettings';
 
 
 export default class SidebarMain extends React.PureComponent {
@@ -43,8 +43,8 @@ export default class SidebarMain extends React.PureComponent {
             );
         } else {
             SideBarList = (
-                <SidebarSets
-                  sets={this.props.sets}
+                <SidebarSettings
+                  settings={this.props.settings}
                   toggleReceive={() => this.props.toggleReceive()}
                   toggleSound={() => this.props.toggleSound()}
                   toggleNotice={() => this.props.toggleNotice()}

@@ -23,7 +23,7 @@ const initialState = fromJS({
     }],
     warning: '',
     modal: 0,
-    sets: {
+    settings: {
         receive: true,
         sound: true,
         notice: true,

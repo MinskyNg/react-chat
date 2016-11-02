@@ -262,7 +262,7 @@ export function sendMsg(msg) {
                 time: msg.time
             });
         } else {
-            fetch(`http://www.tuling123.com/openapi/api?key=e1926d22a51e416f981b271a06d92f1b&info=${msg.text}&userid=${sender.username}`, {
+            return fetch(`http://www.tuling123.com/openapi/api?key=e1926d22a51e416f981b271a06d92f1b&info=${msg.text}&userid=${sender.username}`, {
                 method: 'get',
                 headers: {
                     Accept: '*/*'

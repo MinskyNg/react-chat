@@ -1,4 +1,4 @@
-import { INIT_USERS, ADD_USER, REMOVE_USER, ADD_USER_MSG, UPDATE_USER, ADD_SELF_MSG }
+import { INIT_USERS, ADD_USER, REMOVE_USER, UPDATE_USER, ADD_USER_MSG, ADD_SELF_MSG }
   from '../constants/actionTypes';
 import { fromJS, Map, List } from 'immutable';
 
@@ -17,7 +17,7 @@ export default function users(state = List(), action) {
         case UPDATE_USER:
             const user = action.user;
             return state.update(state.findIndex(y => y.get('username') === user.username),
-                    x => x.merge({ signature: user.signature, avarar: user.avatar })
+                    x => x.merge({ signature: user.signature, avatar: user.avatar })
                 );
         case ADD_USER_MSG:
             let msg = action.msg;

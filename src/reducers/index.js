@@ -5,7 +5,7 @@ import users from './users';
 import groups from './groups';
 import warning from './warning';
 import modal from './modal';
-import sets from './sets';
+import settings from './settings';
 
 
 export default combineReducers({
@@ -15,5 +15,5 @@ export default combineReducers({
     groups,
     warning,
     modal,
-    sets
+    settings
 });

@@ -14,19 +14,21 @@ export default function groups(state = List(), action) {
         case ADD_GROUP_MSG:
             const msg = action.msg;
             return state.update(state.findIndex(y => y.get('name') === msg.target),
-                x => x.update('msg', fromJS([{
-                    sender: msg.sender,
-                    avatar: msg.avatar,
-                    type: msg.type,
-                    text: msg.text,
-                    time: msg.time
-                }]), y => y.push(Map({
-                    sender: msg.sender,
-                    avatar: msg.avatar,
-                    type: msg.type,
-                    text: msg.text,
-                    time: msg.time
-                }))));
+                x => x.update('msg',
+                    fromJS([{
+                        sender: msg.sender,
+                        avatar: msg.avatar,
+                        type: msg.type,
+                        text: msg.text,
+                        time: msg.time
+                    }]),
+                    y => y.push(Map({
+                        sender: msg.sender,
+                        avatar: msg.avatar,
+                        type: msg.type,
+                        text: msg.text,
+                        time: msg.time
+                    }))));
         default:
             return state;
     }

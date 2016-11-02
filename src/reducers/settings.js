@@ -6,7 +6,7 @@ import { Map } from 'immutable';
 /**
 * 设置数据
 **/
-export default function sets(state = Map({
+export default function settings(state = Map({
     receive: true, sound: true, notice: true, screen: false
 }), action) {
     switch (action.type) {

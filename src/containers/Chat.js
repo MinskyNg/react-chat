@@ -23,9 +23,9 @@ class Chat extends React.PureComponent {
     componentDidMount() {
         const { dispatch, user } = this.props;
         this.target = this.props.target;
-        this.receive = this.props.sets.receive;
-        this.sound = this.props.sets.sound;
-        this.notice = this.props.sets.notice;
+        this.receive = this.props.settings.receive;
+        this.sound = this.props.settings.sound;
+        this.notice = this.props.settings.notice;
         this._sound.volume = 0.5;
 
         const addUserMsgA = msg => {
@@ -216,17 +216,17 @@ class Chat extends React.PureComponent {
         if (this.props.target !== nextProps.target) {
             this.target = nextProps.target;
         }
-        if (this.props.sets.receive !== nextProps.sets.receive) {
-            this.receive = nextProps.sets.receive;
+        if (this.props.settings.receive !== nextProps.settings.receive) {
+            this.receive = nextProps.settings.receive;
         }
-        if (this.props.sets.sound !== nextProps.sets.sound) {
-            this.sound = nextProps.sets.sound;
+        if (this.props.settings.sound !== nextProps.settings.sound) {
+            this.sound = nextProps.settings.sound;
         }
-        if (this.props.sets.notice !== nextProps.sets.notice) {
-            this.notice = nextProps.sets.notice;
+        if (this.props.settings.notice !== nextProps.settings.notice) {
+            this.notice = nextProps.settings.notice;
         }
-        if (this.props.sets.screen !== nextProps.sets.screen) {
-            if (nextProps.sets.screen === true) {
+        if (this.props.settings.screen !== nextProps.settings.screen) {
+            if (nextProps.settings.screen === true) {
                 this.requestFullScreen();
             } else {
                 this.exitFullscreen();
@@ -262,7 +262,7 @@ class Chat extends React.PureComponent {
 
 
     render() {
-        const { dispatch, user, target, users, groups, warning, modal, sets } = this.props;
+        const { dispatch, user, target, users, groups, warning, modal, settings } = this.props;
 
         // 筛选当前消息和聊天对象资料
         let msg = [];
@@ -304,7 +304,7 @@ class Chat extends React.PureComponent {
                   user={user}
                   users={users}
                   groups={groups}
-                  sets={sets}
+                  settings={settings}
                   signout={() => dispatch(signout())}
                   joinGroup={name => dispatch(joinGroup(name))}
                   privateChat={name => dispatch(privateChat(name))}
@@ -361,7 +361,7 @@ Chat.propTypes = {
     })).isRequired,
     warning: PropTypes.string.isRequired,
     modal: PropTypes.number.isRequired,
-    sets: PropTypes.shape({
+    settings: PropTypes.shape({
         receive: PropTypes.bool.isRequired,
         sound: PropTypes.bool.isRequired,
         notice: PropTypes.bool.isRequired,
@@ -378,7 +378,7 @@ function selector(state) {
         groups: state.get('groups').toJS(),
         warning: state.get('warning'),
         modal: state.get('modal'),
-        sets: state.get('sets').toJS()
+        settings: state.get('settings').toJS()
     };
 }
 
