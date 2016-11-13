@@ -4,11 +4,10 @@ branches:
 language: node_js
 sudo: true
 node_js:
-  - "5"
-before_script:
-  - npm install
-script:
-  - npm run test
+  - stable
+cache:
+  directories:
+    - node_modules
 after_script:
     - npm run coveralls
 os:
