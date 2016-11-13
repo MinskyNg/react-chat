@@ -1,5 +1,5 @@
-[![Build](https://img.shields.io/travis/MinskyNg/react-chat/master.svg)](https://travis-ci.org/MinskyNg/react-chat)
-[![Coverage Status](https://img.shields.io/coveralls/MinskyNg/react-chat/master.svg)](https://coveralls.io/github/MinskyNg/react-chat)
+[![Build](https://travis-ci.org/MinskyNg/react-chat.svg?branch=master)](https://travis-ci.org/MinskyNg/react-chat?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/MinskyNg/react-chat/badge.svg?branch=master)](https://coveralls.io/github/MinskyNg/react-chat?branch=master)
 
 # 基于Node.js、Socket.io、React的实时聊天室
 
