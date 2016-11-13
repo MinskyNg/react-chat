@@ -22,8 +22,6 @@ describe('async actions', () => {
     afterEach(() => {
         window.fetch.restore();
         localStorage.setItem.restore();
-        getStateStub.reset();
-        dispatchSpy.reset();
     });
 
 
