@@ -1,6 +1,6 @@
 /**
-* 用户数据
-**/
+ * 用户数据
+ */
 
 
 var bcrypt = require('bcrypt-nodejs');

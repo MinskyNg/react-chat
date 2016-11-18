@@ -4,8 +4,11 @@ import { Map } from 'immutable';
 
 
 /**
-* 设置数据
-**/
+ * 设置数据
+ * @param {object} state 默认state
+ * @param {object} action action参数
+ * @return {object} state
+ */
 export default function settings(state = Map({
     receive: true, sound: true, notice: true, screen: false
 }), action) {

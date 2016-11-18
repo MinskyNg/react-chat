@@ -1,6 +1,12 @@
 /**
-* 侧边栏设置列表
-**/
+ * 侧边栏设置列表
+ * @class SidebarSettings
+ * @prop {object} settings 设置列表
+ * @prop {function} toggleReceive 切换接收私聊
+ * @prop {function} toggleSound 切换声音提示
+ * @prop {function} toggleNotice 切换桌面提示
+ * @prop {function} toggleScreen 切换全屏
+ */
 
 
 import React from 'react';

@@ -1,6 +1,9 @@
 /**
-* 聊天室消息列表
-**/
+ * 聊天室消息列表
+ * @class MainMessages
+ * @prop {object} user 用户资料
+ * @prop {array} msg 聊天对话
+ */
 
 
 import React from 'react';

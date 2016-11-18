@@ -1,6 +1,6 @@
 /**
-* 用户相关路由
-**/
+ * 用户相关路由
+ */
 
 
 var bodyParser = require('body-parser');

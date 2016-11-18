@@ -1,6 +1,14 @@
 /**
-* 聊天室
-**/
+ * 聊天室
+ * @class Chat
+ * @prop {object} user 用户资料
+ * @prop {object} target 聊天对象
+ * @prop {array} users 用户列表
+ * @prop {array} groups 群组列表
+ * @prop {string} warning 提示
+ * @prop {number} modal 显示模态框类型
+ * @prop {object} settings 设置列表
+ */
 
 
 import React, { PropTypes } from 'react';

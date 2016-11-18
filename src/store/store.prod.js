@@ -1,6 +1,6 @@
 /**
-* 生产环境redux store
-**/
+ * 生产环境redux store
+ */
 
 
 import { applyMiddleware, createStore, compose } from 'redux';

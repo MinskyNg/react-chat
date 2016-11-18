@@ -1,6 +1,13 @@
 /**
-* 侧边栏导航
-**/
+ * 侧边栏导航
+ * @class SidebarNav
+ * @prop {string} menu 菜单显示方式
+ * @prop {function} toggleMenu 切换菜单
+ * @prop {object} user 用户资料
+ * @prop {function} signout 登出
+ * @prop {function} showEditUser 展现资料编辑框
+ * @prop {function} search 搜索
+ */
 
 
 import React from 'react';

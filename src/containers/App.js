@@ -1,6 +1,8 @@
 /**
-* 主体组件
-**/
+ * 主体组件
+ * @class App
+ * @prop {object} children 子组件
+ */
 
 
 import React from 'react';

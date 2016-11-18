@@ -1,6 +1,11 @@
 /**
-* 聊天室主体
-**/
+ * 聊天室主体
+ * @prop {string} menu 菜单显示方式
+ * @prop {object} user 用户资料
+ * @prop {array} msg 聊天对话
+ * @prop {object} targetProfile 聊天对象资料
+ * @prop {function} sendMsg 发送信息
+ */
 
 
 import React from 'react';

@@ -1,6 +1,14 @@
 /**
-* 侧边栏搜索内容
-**/
+ * 侧边栏搜索内容
+ * @class SidebarSearch
+ * @prop {string} menu 菜单显示方式
+ * @prop {array} users 用户列表
+ * @prop {array} groups 群组列表
+ * @prop {string} keyword 搜索关键词
+ * @prop {function} joinGroup 加入群组
+ * @prop {function} privateChat 私聊
+ * @prop {function} back 返回
+ */
 
 
 import React from 'react';

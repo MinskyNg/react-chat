@@ -3,8 +3,11 @@ import { fromJS, Map, List } from 'immutable';
 
 
 /**
-* 群组数据
-**/
+ * 群组数据
+ * @param {object} state 默认state
+ * @param {object} action action参数
+ * @return {object} state
+ */
 export default function groups(state = List(), action) {
     switch (action.type) {
         case INIT_GROUPS:

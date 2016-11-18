@@ -1,6 +1,9 @@
 /**
-* 侧边栏用户列表
-**/
+ * 侧边栏用户列表
+ * @class SidebarUsers
+ * @prop {array} users 用户列表
+ * @prop {function} privateChat 私聊
+ */
 
 
 import React from 'react';

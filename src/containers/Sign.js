@@ -1,6 +1,8 @@
 /**
-* 注册登录页
-**/
+ * 注册登录页
+ * @class Sign
+ * @prop {string} warning 提示
+ */
 
 
 import React, { PropTypes } from 'react';

@@ -1,6 +1,8 @@
 /**
-* 聊天室输入区
-**/
+ * 聊天室输入区
+ * @class MainInput
+ * @prop {function} sendMsg 发送信息
+ */
 
 
 import React from 'react';

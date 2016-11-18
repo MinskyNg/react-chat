@@ -1,6 +1,11 @@
 /**
-* 用户资料编辑
-**/
+ * 资料编辑
+ * @prop {object} user 用户资料
+ * @prop {string} warning 提示
+ * @prop {function} updateProfile 更新资料
+ * @prop {function} changeWarning 更新提示
+ * @prop {function} closeModel 关闭模态框
+ */
 
 
 import React from 'react';

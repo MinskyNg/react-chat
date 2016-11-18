@@ -1,3 +1,7 @@
+/**
+ * 前端路由
+ */
+
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { socket, signin } from './actions';

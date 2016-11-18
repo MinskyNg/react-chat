@@ -18,8 +18,8 @@ process.env.NODE_ENV = 'development';
 
 
 /**
-* 初始化环境配置
-**/
+ * 初始化环境配置
+ */
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/chat');
 var port = normalizePort(process.env.PORT || '3000');
 var dist = path.join(__dirname, '../dist');
@@ -30,8 +30,8 @@ app.set('view engine', 'html');
 
 
 /**
-* 使用中间件
-**/
+ * 使用中间件
+ */
 app.use(webpackDevMiddleware(compiler, {
     publicPath: webpackDevConfig.output.publicPath,
     noInfo: true,
@@ -54,8 +54,8 @@ app.get('/', function(req, res) {
 
 
 /**
-* 加载路由
-**/
+ * 加载路由
+ */
 // 在线用户列表
 var onlineUsers = [{
     username: '图灵机器人',
@@ -72,8 +72,8 @@ app.use(groupRouter);
 
 
 /**
-* 错误处理
-**/
+ * 错误处理
+ */
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
@@ -92,8 +92,8 @@ if (app.get('env') === 'development') {
 
 
 /**
-* 服务器启动
-**/
+ * 服务器启动
+ */
 // 用户socket引用
 var sockets = {};
 var server = require('http').Server(app);

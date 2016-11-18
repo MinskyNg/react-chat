@@ -1,6 +1,6 @@
 /**
-* 群组相关路由
-**/
+ * 群组相关路由
+ */
 
 
 var bodyParser = require('body-parser');

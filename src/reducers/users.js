@@ -4,8 +4,11 @@ import { fromJS, Map, List } from 'immutable';
 
 
 /**
-* 用户列表
-**/
+ * 用户列表
+ * @param {object} state 默认state
+ * @param {object} action action参数
+ * @return {object} state
+ */
 export default function users(state = List(), action) {
     switch (action.type) {
         case INIT_USERS:

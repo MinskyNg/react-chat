@@ -1,6 +1,19 @@
 /**
-* 侧边栏主体
-**/
+ * 侧边栏主体
+ * @class SidebarMain
+ * @state {number} content 显示内容
+ * @prop {string} menu 菜单显示方式
+ * @prop {array} users 用户列表
+ * @prop {array} groups 群组列表
+ * @prop {object} settings 设置列表
+ * @prop {function} joinGroup 加入群组
+ * @prop {function} privateChat 私聊
+ * @prop {function} showEditGroup 展现群组编辑框
+ * @prop {function} toggleReceive 切换接收私聊
+ * @prop {function} toggleSound 切换声音提示
+ * @prop {function} toggleNotice 切换桌面提示
+ * @prop {function} toggleScreen 切换全屏
+ */
 
 
 import React from 'react';

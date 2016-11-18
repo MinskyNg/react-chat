@@ -1,6 +1,6 @@
 /**
-* 加载动画
-**/
+ * 加载动画
+ */
 
 
 import React from 'react';

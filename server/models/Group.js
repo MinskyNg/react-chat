@@ -1,6 +1,6 @@
 /**
-* 群组数据
-**/
+ * 群组数据
+ */
 
 
 var mongoose = require('mongoose');

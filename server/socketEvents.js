@@ -1,6 +1,6 @@
 /**
-* Socket.io事件
-**/
+ * Socket.io事件
+ */
 
 
 var User = require('./models/User.js');

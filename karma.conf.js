@@ -75,9 +75,12 @@ module.exports = function(config) {
         logLevel: config.LOG_INFO,
 
         browsers: ['PhantomJS'],
-        // browsers: ['Chrome'],
 
         singleRun: true,
+
+        // browsers: ['Chrome'],
+
+        // singleRun: false,
 
         // autoWatch: true,
 

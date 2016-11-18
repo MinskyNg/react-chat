@@ -1,6 +1,10 @@
 /**
-* 群组列表
-**/
+ * 群组列表
+ * @class SidebarGroups
+ * @prop {array} groups 群组列表
+ * @prop {function} joinGroup 加入群组
+ * @prop {function} showEditGroup 展现群组编辑框
+ */
 
 
 import React from 'react';

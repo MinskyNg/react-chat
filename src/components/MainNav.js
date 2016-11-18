@@ -1,6 +1,8 @@
 /**
-* 聊天室导航栏
-**/
+ * 聊天室导航栏
+ * @class MainNav
+ * @prop {object} targetProfile 聊天对象
+ */
 
 
 import React from 'react';

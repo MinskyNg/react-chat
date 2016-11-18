@@ -1,6 +1,11 @@
 /**
-* 群组资料编辑
-**/
+ * 群组编辑
+ * @class EditGroup
+ * @prop {string} warning 提示
+ * @prop {function} createGroup 创建群组
+ * @prop {function} changeWarning 更新提示
+ * @prop {function} closeModel 关闭模态框
+ */
 
 
 import React from 'react';
