@@ -29,6 +29,10 @@
         border-radius: 50%;
         overflow: hidden;
         cursor: pointer;
+        transition: .3s transform linear;
+        &:hover {
+            transform: scale(1.08);
+        }
         img {
             position: absolute;
             top: 0;
