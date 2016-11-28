@@ -3,7 +3,7 @@
 
 # 基于Node.js、Socket.io、React的实时聊天室
 
-[react-chat](http://minsky.me/chat)
+[在线地址 react-chat](http://minsky.me/chat)
 
 ## How to start
 

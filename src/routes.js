@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, IndexRoute, Redirect } from 'react-router';
 import { socket, signin } from './actions';
 import App from './containers/App';
 import Chat from './containers/Chat';
@@ -32,6 +32,7 @@ export default (store) => {
             <IndexRoute component={Chat} onEnter={requireUser(store)} onLeave={() => socket.emit('offline')} />
             <Route path="sign" component={Sign} />
             <Route path="loading" component={Loading} />
+            <Redirect from="*" to="/" />
         </Route>
     );
 };
