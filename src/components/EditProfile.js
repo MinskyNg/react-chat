@@ -62,7 +62,7 @@ export default class EditProfile extends React.PureComponent {
                       src={user.avatar}
                       alt="头像"
                     />
-                    <input type="file" accept="image/*"
+                    <input type="file"
                       ref={ input => this._fileInput = input }
                       onChange={() => this.handleUpload()}
                     />

@@ -62,7 +62,7 @@ export default class EditGroup extends React.PureComponent {
                       src="http://7xnpxz.com1.z0.glb.clouddn.com/groupdefault.png"
                       alt="头像"
                     />
-                    <input type="file" accept="image/*"
+                    <input type="file"
                       ref={ input => this._fileInput = input }
                       onChange={() => this.handleUpload()}
                     />

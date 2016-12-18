@@ -73,7 +73,7 @@ export default class MainInput extends React.PureComponent {
             <div className="main-input">
                 <a className="button-image icon-image">
                     <input
-                      type="file" accept="image/*"
+                      type="file"
                       ref={ input => this._fileInput = input }
                       onChange={() => this.handleUpload()}
                     />
