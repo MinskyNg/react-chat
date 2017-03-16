@@ -42,9 +42,9 @@ export default class Sidebar extends React.PureComponent {
             <aside className="sidebar" style={resStyle}>
                 <SidebarNav
                   menu={menu}
-                  toggleMenu={bool => this.props.toggleMenu(bool)}
+                  toggleMenu={this.props.toggleMenu}
                   user={this.props.user}
-                  signout={() => this.props.signout()}
+                  signout={this.props.signout}
                   showEditUser={() => this.props.changeModal(1)}
                   search={keyword => this.setState({ search: true, keyword })}
                 />
@@ -56,8 +56,8 @@ export default class Sidebar extends React.PureComponent {
                     users={this.props.users}
                     groups={this.props.groups}
                     keyword={this.state.keyword}
-                    privateChat={name => this.props.privateChat(name)}
-                    joinGroup={name => this.props.joinGroup(name)}
+                    privateChat={this.props.privateChat}
+                    joinGroup={this.props.joinGroup}
                     back={() => this.setState({ search: false })}
                   />
                   :
@@ -66,13 +66,13 @@ export default class Sidebar extends React.PureComponent {
                     users={this.props.users}
                     groups={this.props.groups}
                     settings={this.props.settings}
-                    privateChat={name => this.props.privateChat(name)}
-                    joinGroup={name => this.props.joinGroup(name)}
+                    privateChat={this.props.privateChat}
+                    joinGroup={this.props.joinGroup}
                     showEditGroup={() => this.props.changeModal(2)}
-                    toggleReceive={() => this.props.toggleReceive()}
-                    toggleSound={() => this.props.toggleSound()}
-                    toggleNotice={() => this.props.toggleNotice()}
-                    toggleScreen={() => this.props.toggleScreen()}
+                    toggleReceive={this.props.toggleReceive}
+                    toggleSound={this.props.toggleSound}
+                    toggleNotice={this.props.toggleNotice}
+                    toggleScreen={this.props.toggleScreen}
                   />
                 }
             </aside>

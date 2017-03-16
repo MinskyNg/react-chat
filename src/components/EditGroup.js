@@ -1,36 +1,39 @@
 /**
  * 群组编辑
- * @class EditGroup
+ * @function EditGroup
  * @prop {string} warning 提示
  * @prop {function} createGroup 创建群组
  * @prop {function} changeWarning 更新提示
- * @prop {function} closeModel 关闭模态框
+ * @prop {function} closeModal 关闭模态框
  */
 
 
 import React from 'react';
 
 
-export default class EditGroup extends React.PureComponent {
+export default function EditGroup({ warning, createGroup, changeWarning, closeModal }) {
+    let avatar;
+    let file;
+    let name;
+    let signature;
+
+
     // 处理提交资料
-    handleSubmit(event) {
-        event.preventDefault();
-        const name = this._name.value.replace(/(^\s*)|(\s*$)/g, '');
-        const signature = this._signature.value.replace(/(^\s*)|(\s*$)/g, '');
-        this.props.createGroup({
-            name,
-            avatar: this._avatar.src,
-            signature
+    const handleSubmit = e => {
+        e.preventDefault();
+        createGroup({
+            avatar: avatar.src,
+            name: name.value.replace(/(^\s*)|(\s*$)/g, ''),
+            signature: signature.value.replace(/(^\s*)|(\s*$)/g, '')
         });
-    }
+    };
 
 
     // 处理图片上传
-    handleUpload() {
-        const fileInput = this._fileInput;
-        if (fileInput.files && fileInput.files[0]) {
+    const handleUpload = () => {
+        if (file.files && file.files[0]) {
             const body = new FormData();
-            body.append('smfile', fileInput.files[0]);
+            body.append('smfile', file.files[0]);
             fetch(' https://sm.ms/api/upload', {
                 method: 'post',
                 headers: {
@@ -41,48 +44,45 @@ export default class EditGroup extends React.PureComponent {
             .then(response => response.json())
             .then(data => {
                 if (data.data) {
-                    this._avatar.src = data.data.url;
+                    avatar.src = data.data.url;
                 } else {
-                    this.props.changeWarning(data.msg);
+                    changeWarning(data.msg);
                 }
             })
             .catch(e => console.log('Oops, upload error', e));
         }
-    }
+    };
 
-
-    render() {
-        return (
-            <div className="edit-group">
-                <h2>创建群组</h2>
-                <p className="warning">{this.props.warning}</p>
-                <div>
-                    <img
-                      ref={ img => this._avatar = img }
-                      src="http://7xnpxz.com1.z0.glb.clouddn.com/groupdefault.png"
-                      alt="头像"
-                    />
-                    <input type="file"
-                      ref={ input => this._fileInput = input }
-                      onChange={() => this.handleUpload()}
-                    />
-                </div>
-                <form action="#" onSubmit={ e => this.handleSubmit(e) }>
-                    <input
-                      ref={ input => this._name = input }
-                      type="text"
-                      placeholder="请输入群组名"
-                      maxLength="10"
-                    />
-                    <textarea
-                      ref={ textarea => this._signature = textarea }
-                      placeholder="请输入群组简介"
-                      maxLength="30"
-                    ></textarea>
-                    <input type="submit" value="确认" />
-                    <input type="button" value="取消" onClick={() => this.props.closeModal()} />
-                </form>
+    return (
+        <div className="edit-group">
+            <h2>创建群组</h2>
+            <p className="warning">{warning}</p>
+            <div>
+                <img
+                  ref={ img => avatar = img }
+                  src="http://7xnpxz.com1.z0.glb.clouddn.com/groupdefault.png"
+                  alt="头像"
+                />
+                <input type="file"
+                  ref={ input => file = input }
+                  onChange={handleUpload}
+                />
             </div>
-        );
-    }
+            <form action="#" onSubmit={handleSubmit}>
+                <input
+                  ref={ input => name = input }
+                  type="text"
+                  placeholder="请输入群组名"
+                  maxLength="10"
+                />
+                <textarea
+                  ref={ textarea => signature = textarea }
+                  placeholder="请输入群组简介"
+                  maxLength="30"
+                ></textarea>
+                <input type="submit" value="确认" />
+                <input type="button" value="取消" onClick={closeModal} />
+            </form>
+        </div>
+    );
 }

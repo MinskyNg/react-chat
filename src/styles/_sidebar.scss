@@ -233,7 +233,7 @@
         transition: .4s all ease;
     }
 
-    input[type=checkbox] {
+    input[type="checkbox"] {
         visibility: hidden;
         &:checked+label {
             left: 60px;

@@ -2,11 +2,13 @@
  * 聊天室消息列表
  * @class MainMessages
  * @prop {object} user 用户资料
- * @prop {array} msg 聊天对话
+ * @prop {array} msg 聊天消息
  */
 
 
 import React from 'react';
+import MessageSystem from './MessageSystem';
+import MessageUser from './MessageUser';
 
 
 export default class MainMessages extends React.PureComponent {
@@ -19,59 +21,38 @@ export default class MainMessages extends React.PureComponent {
         const { user, msg } = this.props;
         const { username, avatar } = user;
 
-        // 根据消息类型不同 生成消息列表
-        const msgItems = msg.map((msgItem, index) => {
+        // 生成消息列表
+        const msgMap = (msgItem, index) => {
             if (msgItem.type === 'system') {
-                return (
-                    <div key={index} className="message-system">
-                        <span>{msgItem.text}</span>
-                    </div>
-                );
+                return <MessageSystem key={index} text={msgItem.text} />;
             }
             if (msgItem.sender === username) {
-                return (
-                    <div key={index} className="message-container message-self">
-                        <div className="message-sender">
-                            <img
-                              src={avatar}
-                              alt="头像"
-                            />
-                        </div>
-                        <div className="message-content">
-                            <div>{username}<span className="message-time">{msgItem.time}</span></div>
-                            <div className="message-text">
-                                {msgItem.type === 'image' ? <img src={msgItem.text} /> : msgItem.text}
-                            </div>
-                        </div>
-                    </div>
-                );
+                return (<MessageUser
+                  key={index}
+                  self
+                  avatar={avatar}
+                  username={username}
+                  time={msgItem.time}
+                  type={msgItem.type}
+                  text={msgItem.text}
+                />);
             }
 
-            return (
-                <div key={index} className="message-container">
-                    <div className="message-sender">
-                        <img
-                          src={msgItem.avatar}
-                          alt="头像"
-                        />
-                    </div>
-                    <div className="message-content message-other">
-                        <div>{msgItem.sender}<span className="message-time">{msgItem.time}</span></div>
-                        <div className="message-text">
-                            {msgItem.type === 'image' ? <img src={msgItem.text} /> : msgItem.text}
-                        </div>
-                    </div>
-                </div>
-            );
-        });
+            return (<MessageUser
+              key={index}
+              self={false}
+              avatar={msgItem.avatar}
+              username={msgItem.sender}
+              time={msgItem.time}
+              type={msgItem.type}
+              text={msgItem.text}
+            />);
+        };
 
 
         return (
-            <div
-              className="main-messages"
-              ref={ div => this._messages = div }
-            >
-                {msgItems}
+            <div className="main-messages" ref={ div => this._messages = div } >
+                {msg.map(msgMap)}
             </div>
         );
     }

@@ -8,7 +8,7 @@
     background-color: #F6F6F6;
     box-shadow: 8px 8px 8px -3px #E5E5E5;
 
-    input[type=checkbox] {
+    input[type="checkbox"] {
         visibility: hidden;
         &:checked+label {
             left: 27px;

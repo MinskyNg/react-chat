@@ -67,7 +67,7 @@ class Sign extends React.PureComponent {
                       onClick={ () => this.setState({ signinPage: false })}
                     >SIGN UP</a>
                 </div>
-                <form action="#" onSubmit={ e => this.handleSubmit(e) }>
+                <form action="#" onSubmit={e => this.handleSubmit(e)}>
                     <div className="username">
                         <i className="icon-username"></i>
                         <input

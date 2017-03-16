@@ -12,10 +12,12 @@
 
 
 import React, { PropTypes } from 'react';
+import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import Sidebar from '../components/Sidebar';
 import Main from '../components/Main';
 import Model from '../components/Model';
+import NoticeAudio from '../components/NoticeAudio';
 import { socket, fetchUsers, fetchGroups, signout, updateProfile, changeTarget,
     createGroup, joinGroup, privateChat, sendMsg, initUsers, addUser, removeUser,
     updateUser, addGroup, addGroupMsg, addUserMsg, changeWarning, changeModal,
@@ -34,13 +36,14 @@ class Chat extends React.PureComponent {
         this.receive = this.props.settings.receive;
         this.sound = this.props.settings.sound;
         this.notice = this.props.settings.notice;
-        this._sound.volume = 0.5;
+        const refSound = findDOMNode(this.audio);
+        refSound.volume = 0.5;
 
         const addUserMsgA = msg => {
             if (this.receive) {
                 dispatch(addUserMsg(msg));
                 if (this.sound) {
-                    this._sound.play();
+                    refSound.play();
                 }
                 if (this.notice) {
                     new Notification('React Chat', { lang: 'utf-8',
@@ -51,7 +54,7 @@ class Chat extends React.PureComponent {
         const addGroupMsgA = msg => {
             dispatch(addGroupMsg(msg));
             if (this.sound) {
-                this._sound.play();
+                refSound.play();
             }
             if (this.notice) {
                 new Notification('React Chat', { lang: 'utf-8',
@@ -331,7 +334,6 @@ class Chat extends React.PureComponent {
                 />
                 <Model
                   user={user}
-                  groups={groups}
                   warning={warning}
                   modal={modal}
                   updateProfile={newUser => dispatch(updateProfile(newUser))}
@@ -342,10 +344,7 @@ class Chat extends React.PureComponent {
                       dispatch(changeModal(0));
                   }}
                 />
-                <audio ref={audio => this._sound = audio} style={{ display: 'none' }}>
-                    <source src="http://7xnpxz.com1.z0.glb.clouddn.com/notice.mp3" type="audio/mp3" />
-                    <source src="http://7xnpxz.com1.z0.glb.clouddn.com/notice.ogg" type="audio/ogg" />
-                </audio>
+                <NoticeAudio ref={audio => {this.audio = audio;}} />
             </div>
         );
     }

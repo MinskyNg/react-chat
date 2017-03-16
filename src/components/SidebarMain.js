@@ -43,25 +43,25 @@ export default class SidebarMain extends React.PureComponent {
             SideBarList = (
                 <SidebarUsers
                   users={this.props.users}
-                  privateChat={name => this.props.privateChat(name)}
+                  privateChat={this.props.privateChat}
                 />
             );
         } else if (content === 2) {
             SideBarList = (
                 <SidebarGroups
                   groups={this.props.groups}
-                  joinGroup={name => this.props.joinGroup(name)}
-                  showEditGroup={() => this.props.showEditGroup()}
+                  joinGroup={this.props.joinGroup}
+                  showEditGroup={this.props.showEditGroup}
                 />
             );
         } else {
             SideBarList = (
                 <SidebarSettings
                   settings={this.props.settings}
-                  toggleReceive={() => this.props.toggleReceive()}
-                  toggleSound={() => this.props.toggleSound()}
-                  toggleNotice={() => this.props.toggleNotice()}
-                  toggleScreen={() => this.props.toggleScreen()}
+                  toggleReceive={this.props.toggleReceive}
+                  toggleSound={this.props.toggleSound}
+                  toggleNotice={this.props.toggleNotice}
+                  toggleScreen={this.props.toggleScreen}
                 />
             );
         }
